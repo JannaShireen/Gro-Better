@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1086515978794",
+    "project_id": "gro-better",
+    "storage_bucket": "gro-better.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086515978794:android:de6a12e5e2e7de06ca5953",
+        "android_client_info": {
+          "package_name": "com.janna.gro_better"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086515978794-rmev649d3vo0jcdkne1n1etf35r6588p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.janna.gro_better",
+            "certificate_hash": "0e5cbed39ff08344627aa5b4aad09c8710ce8451"
+          }
+        },
+        {
+          "client_id": "1086515978794-cae2tkphacledgobpdlqbn5q51uqgmav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG5sh65AAGWKJJ4i8Nyqt2ZZSHeKF76R0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086515978794-1tijr5loi19h6gufhe01g52to75vm6g8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
