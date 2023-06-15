@@ -51,10 +51,10 @@ class _SignInState extends State<SignIn> {
                         const SizedBox(height: 30),
 
                         // logo
-                        Image.asset(
-                          'assets/images/download.jpg',
-                        ),
-                        // const Icon(
+                        // Image.asset(
+                        //   'assets/images/download.jpg',
+                        // ),
+                        // // const Icon(
                         //   Icons.view_comfortable,
                         //   size: 100,
                         // ),
@@ -72,7 +72,7 @@ class _SignInState extends State<SignIn> {
 
                         kHeight20,
                         Container(
-                          margin: EdgeInsets.all(20),
+                          margin: const EdgeInsets.all(20),
                           child: Form(
                               key: _formKey,
                               child: Center(
@@ -154,12 +154,12 @@ class _SignInState extends State<SignIn> {
                                               }
                                             }
                                           },
-                                          child: Text('Sign In')),
+                                          child: const Text('Sign In')),
                                     ),
 
                                     Text(
                                       error,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.red, fontSize: 14),
                                     )
                                   ],
@@ -176,7 +176,7 @@ class _SignInState extends State<SignIn> {
                             height: 24.0,
                             width: 24.0,
                           ),
-                          label: Text('Sign in with Google Account'),
+                          label: const Text('Sign in with Google Account'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             foregroundColor: Colors.black,
@@ -222,7 +222,7 @@ class _SignInState extends State<SignIn> {
                             onPressed: () {
                               widget.toggleView();
                             },
-                            child: Text('Register here')),
+                            child: const Text('Register here')),
                       ],
                     ),
                   ),

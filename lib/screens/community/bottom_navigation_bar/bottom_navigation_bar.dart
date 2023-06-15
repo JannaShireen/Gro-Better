@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gro_better/screens/community/community.dart';
 import 'package:gro_better/screens/experts/experts.dart';
-import 'package:gro_better/screens/explore/explore.dart';
 import 'package:gro_better/screens/profile/profile.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +19,7 @@ class HomeScreen extends StatelessWidget {
                   .elementAt(bottomNavState.selectedIndex),
             ),
             bottomNavigationBar: BottomNavigationBar(
+              enableFeedback: true,
               backgroundColor: kDefaultIconLightColor,
               selectedItemColor: kDefaultIconDarkColor,
               type: BottomNavigationBarType.fixed,
@@ -30,10 +30,6 @@ class HomeScreen extends StatelessWidget {
                     color: kPrimaryColor,
                   ),
                   label: 'Community',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search, color: kPrimaryColor),
-                  label: 'Explore',
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.medical_services, color: kPrimaryColor),
@@ -60,8 +56,8 @@ class HomeState extends ChangeNotifier {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     CommunityScreen(),
-    const ExploreScreen(),
-    const ExpertScreen(),
+    //ExpertScreen(),
+    const DoctorsList(),
     const ProfileScreen(),
   ];
 

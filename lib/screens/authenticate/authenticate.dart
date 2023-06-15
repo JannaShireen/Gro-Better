@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gro_better/screens/authenticate/register.dart';
-
 import 'package:gro_better/screens/authenticate/signin.dart';
 
 class Authenticate extends StatefulWidget {
+  const Authenticate({super.key});
+
   @override
   _AuthenticateState createState() => _AuthenticateState();
 }

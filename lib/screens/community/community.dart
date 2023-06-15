@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gro_better/screens/community/widgets/post_status.dart';
+import 'package:gro_better/screens/community/widgets/post_view.dart';
 import 'package:gro_better/services/auth.dart';
-import 'package:gro_better/shared/constants.dart';
+import 'package:gro_better/shared/widgets/profile_pic.dart';
+
+import '../../shared/constants.dart';
 
 class CommunityScreen extends StatelessWidget {
   CommunityScreen({super.key});
@@ -11,110 +16,121 @@ class CommunityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        elevation: 0.0,
-        centerTitle: true,
-        title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset(
-                "assets/images/logo.png",
-                width: 40,
-                height: 40,
-              ),
-              SizedBox(width: 8),
-              Text(
-                'Gro Better',
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+      backgroundColor: kBackgroundColor,
+      body: SafeArea(
+        child: Container(
+          // alignment: Alignment.center,
+          decoration: const BoxDecoration(gradient: gradientColor),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              //     Row(
-              //       children: [
-              //         CircleAvatar(
-              //           radius: 25,
-              //         ),
-              //         SizedBox(
-              //             width:
-              //                 10), // Add some spacing between the CircleAvatar and TextFormField
-              //         Expanded(
-              //           child: GestureDetector(
-              //             onTap: () {},
-              //             child: TextFormField(
-              //               decoration: InputDecoration(
-              //                 border: OutlineInputBorder(
-              //                   borderRadius: BorderRadius.circular(
-              //                       50.0), // Adjust the border radius as desired
-              //                   borderSide: BorderSide(
-              //                     color: Colors.blue, // Set the border color
-              //                     width: 2.0, // Set the border width
-              //                   ),
-              //                 ),
-              //                 hintText: 'Whats on your mind?',
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              kHeight20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset("assets/images/logo.png", width: 45, height: 45),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Gro Better',
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          color: kBackgroundColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                        ),
+                  ),
+                ],
+              ),
               Container(
-                margin: EdgeInsets.only(left: 17),
-                height: 120,
-                width: 420,
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(
-                      10.0), // Adjust the border radius as desired
-                ),
-                child: Center(
-                    child: Text(
-                  'You have no scheduled appointment.',
-                  style: TextStyle(
-                      color: kTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                )),
-              ),
-              kHeight20,
-              TextField(
-                //controller: _statusController,
-                decoration: InputDecoration(
-                  hintText: 'What\'s on your mind?',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16.0),
-              SizedBox(
-                width: 130,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Get the status text
-                    // String status = _statusController.text;
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(40),
+                        bottomRight: Radius.circular(150),
+                      ),
+                      color: Color.fromARGB(248, 64, 123, 96)),
+                  height: 200,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'You have no scheduled appointment.',
+                        style: GoogleFonts.robotoCondensed(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white)),
+                      ),
+                      TextButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.calendar_month_outlined,
+                            color: kDefaultIconLightColor,
+                          ),
+                          label: Text('Schedule Now',
+                              style: GoogleFonts.lato(
+                                  color: kDefaultIconLightColor,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline)))
+                    ],
+                  )),
+              //
 
-                    // Perform any necessary actions with the status (e.g., post to an API)
-
-                    // Clear the text field
-                    // _statusController.clear();
-                  },
-                  child: Text('Post'),
+              const SizedBox(
+                height: 30,
+              ),
+              DividerTeal,
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color.fromARGB(255, 241, 238, 238),
+                  ),
+                  child: Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: ProfilePic(imageUrl: 'janna.jpeg'),
+                      ),
+                      const SizedBox(
+                          width:
+                              15), // Add some spacing between the CircleAvatar and TextFormField
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CreatePostWidget()),
+                          );
+                          const CreatePostWidget();
+                        },
+                        child: Container(
+                          //  margin: EdgeInsets.only(left: 8),
+                          height: 60,
+                          // width: MediaQuery.of(context).size.width * 0.74,
+                          decoration: BoxDecoration(
+                            color: Colors.tealAccent,
+                            backgroundBlendMode: BlendMode.overlay,
+                            borderRadius: BorderRadius.circular(
+                                50.0), // Adjust the border radius as desired
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "What's on your mind?",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              // StatusFeedWidget(),
+
+              const SizedBox(
+                height: 20,
+              ),
+              const Expanded(child: PostViewWidget()),
+              //
             ],
           ),
         ),
@@ -122,40 +138,3 @@ class CommunityScreen extends StatelessWidget {
     );
   }
 }
-
-// class StatusFeedWidget extends StatelessWidget {
-//   final List<String> statusList = [
-//     'Status 1',
-//     'Status 2',
-//     'Status 3',
-//     // Add more status updates here
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: statusList.length,
-//       itemBuilder: (context, index) {
-//         final status = statusList[index];
-//         return StatusItem(status: status);
-//       },
-//     );
-//   }
-// }
-
-// class StatusItem extends StatelessWidget {
-//   final String status;
-
-//   const StatusItem({required this.status});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: EdgeInsets.all(16.0),
-//       child: Text(
-//         status,
-//         style: TextStyle(fontSize: 18.0),
-//       ),
-//     );
-//   }
-

@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gro_better/model/user.dart';
 import 'package:gro_better/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,10 +30,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: kBackgroundColor,
           primaryColor: kPrimaryColor,
-          textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: kTextColor,
+                fontFamily: GoogleFonts.robotoCondensed().fontFamily,
+              ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: Wrapper(),
+        home: const Wrapper(),
       ),
     );
   }
