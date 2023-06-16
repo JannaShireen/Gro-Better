@@ -21,6 +21,7 @@ class _RegisterUserState extends State<RegisterUser> {
   String error = '';
   String email = '';
   String password = '';
+  String confirmPassword = '';
   String name = '';
   int? age;
   Gender gender = Gender.Male;
@@ -31,23 +32,28 @@ class _RegisterUserState extends State<RegisterUser> {
         ? Loading()
         : Scaffold(
             appBar: AppBar(
-              title: Text('Sign up on Gro Better'),
+              title: const Text('Sign up on Gro Better'),
               backgroundColor: kPrimaryColor,
             ),
             body: Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
                     child: Center(
                       child: Column(
                         children: <Widget>[
-                          Text('Already a member? '),
+                          const Text(
+                            'Already a member? ',
+                            style: TextStyle(
+                              color: kTextColor2,
+                            ),
+                          ),
                           TextButton(
                               onPressed: () {
                                 widget.toggleView();
                               },
-                              child: Text('Log In')),
+                              child: const Text('Log In')),
                           TextFormField(
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Full Name'),
@@ -80,6 +86,20 @@ class _RegisterUserState extends State<RegisterUser> {
                           ),
                           kHeight20,
                           TextFormField(
+                            decoration: textInputDecoration.copyWith(
+                                hintText: 'Confirm Password'),
+                            validator: (value) => value != password
+                                ? 'Password do not match'
+                                : null,
+                            obscureText: true,
+                            onChanged: (value) {
+                              setState(() {
+                                confirmPassword = value;
+                              });
+                            },
+                          ),
+                          kHeight20,
+                          TextFormField(
                             decoration:
                                 textInputDecoration.copyWith(hintText: 'Age'),
                             keyboardType: TextInputType.number,
@@ -99,8 +119,8 @@ class _RegisterUserState extends State<RegisterUser> {
                           ),
                           kHeight20,
                           Container(
-                              margin: EdgeInsets.only(right: 360),
-                              child: Text(
+                              margin: const EdgeInsets.only(right: 360),
+                              child: const Text(
                                 'Gender',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 17),
@@ -150,12 +170,13 @@ class _RegisterUserState extends State<RegisterUser> {
                                     }
                                   }
                                 },
-                                child: Text('Register')),
+                                child: const Text('Register')),
                           ),
                           kHeight20,
                           Text(
                             error,
-                            style: TextStyle(color: Colors.red, fontSize: 14),
+                            style: const TextStyle(
+                                color: Colors.red, fontSize: 14),
                           )
                         ],
                       ),

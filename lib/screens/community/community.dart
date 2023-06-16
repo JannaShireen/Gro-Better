@@ -81,15 +81,16 @@ class CommunityScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
+                  height: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(255, 241, 238, 238),
+                    color: Colors.white60,
                   ),
                   child: Row(
                     children: [
                       const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: ProfilePic(imageUrl: 'janna.jpeg'),
+                        child: ProfilePic(imageUrl: 'janna_dp.jpg'),
                       ),
                       const SizedBox(
                           width:
@@ -103,21 +104,10 @@ class CommunityScreen extends StatelessWidget {
                           );
                           const CreatePostWidget();
                         },
-                        child: Container(
-                          //  margin: EdgeInsets.only(left: 8),
-                          height: 60,
-                          // width: MediaQuery.of(context).size.width * 0.74,
-                          decoration: BoxDecoration(
-                            color: Colors.tealAccent,
-                            backgroundBlendMode: BlendMode.overlay,
-                            borderRadius: BorderRadius.circular(
-                                50.0), // Adjust the border radius as desired
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "What's on your mind?",
-                              style: TextStyle(color: Colors.grey),
-                            ),
+                        child: const Center(
+                          child: Text(
+                            "What's on your mind?",
+                            style: TextStyle(color: Colors.grey),
                           ),
                         ),
                       ),

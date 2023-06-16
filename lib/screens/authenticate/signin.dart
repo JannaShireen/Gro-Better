@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gro_better/screens/authenticate/widgets/forget_password.dart';
+import 'package:gro_better/screens/authenticate/widgets/login_page_logo.dart';
+import 'package:gro_better/screens/authenticate/widgets/text_form_field.dart';
 import 'package:gro_better/services/auth.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:gro_better/shared/loading.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -28,17 +30,19 @@ class _SignInState extends State<SignIn> {
         : Scaffold(
             //  backgroundColor: Colors.brown[100],
             appBar: AppBar(
-              backgroundColor: kPrimaryColor,
-              elevation: 0.0,
-              centerTitle: true,
-              title: Text(
-                'Gro Better',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-              ),
-            ),
+                backgroundColor: kPrimaryColor,
+                elevation: 0.0,
+                centerTitle: true,
+                title: Text(
+                  'Gro Better',
+                  style: appBarTitleText,
+                )
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .headlineMedium!
+                //       .copyWith(color: kTextColor2, fontWeight: FontWeight.bold),
+                // ),
+                ),
 
             body: SafeArea(
               child: SingleChildScrollView(
@@ -51,24 +55,13 @@ class _SignInState extends State<SignIn> {
                         const SizedBox(height: 30),
 
                         // logo
-                        // Image.asset(
-                        //   'assets/images/download.jpg',
-                        // ),
-                        // // const Icon(
-                        //   Icons.view_comfortable,
-                        //   size: 100,
-                        // ),
+                        const LoginPageLogo(),
+
                         kHeight30,
 
                         // welcome back, you've been missed!
-                        Text(
-                          'Welcome! Sign In to get better',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            color: Colors.grey[700],
-                            fontSize: 16,
-                          ),
-                        ),
+                        const Text('Welcome! Sign In to get better',
+                            style: textStyle2),
 
                         kHeight20,
                         Container(
@@ -79,35 +72,60 @@ class _SignInState extends State<SignIn> {
                                 child: Column(
                                   children: <Widget>[
                                     // username textfield
-                                    TextFormField(
-                                      decoration: textInputDecoration.copyWith(
-                                          hintText: 'Email or Username'),
-                                      validator: (val) => val!.isEmpty
-                                          ? 'Enter an email'
-                                          : null,
+                                    TextFormFieldWidget(
+                                      hintText: 'Email or Username',
+                                      validator: (val) {
+                                        val!.isEmpty ? 'Enter an email' : null;
+                                        return null;
+                                      },
                                       onChanged: (val) {
                                         setState(() {
                                           email = val;
                                         });
                                       },
                                     ),
+                                    // TextFormField(
+                                    //   decoration: textInputDecoration.copyWith(
+                                    //       hintText: 'Email or Username'),
+                                    //   validator: (val) => val!.isEmpty
+                                    //       ? 'Enter an email'
+                                    //       : null,
+                                    //   onChanged: (val) {
+                                    //     setState(() {
+                                    //       email = val;
+                                    //     });
+                                    //   },
+                                    // ),
 
-                                    const SizedBox(height: 10),
+                                    kHeight10,
 
                                     // password textfield
-                                    TextFormField(
-                                      decoration: textInputDecoration.copyWith(
-                                          hintText: 'Password'),
-                                      validator: (value) => value!.length < 6
+                                    TextFormFieldWidget(
+                                      hintText: 'Password',
+                                      validator: (val) => val!.length < 6
                                           ? 'Password must be at least 6 characters long'
                                           : null,
-                                      obscureText: true,
-                                      onChanged: (value) {
+                                      onChanged: (val) {
                                         setState(() {
-                                          password = value;
+                                          password = val;
                                         });
                                       },
+                                      obscureText: true,
                                     ),
+
+                                    // TextFormField(
+                                    //   decoration: textInputDecoration.copyWith(
+                                    //       hintText: 'Password'),
+                                    //   validator: (value) => value!.length < 6
+                                    //       ? 'Password must be at least 6 characters long'
+                                    //       : null,
+                                    //   obscureText: true,
+                                    //   onChanged: (value) {
+                                    //     setState(() {
+                                    //       password = value;
+                                    //     });
+                                    //   },
+                                    // ),
 
                                     const SizedBox(height: 10),
 
@@ -119,10 +137,19 @@ class _SignInState extends State<SignIn> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          Text(
-                                            'Forgot Password?',
-                                            style: TextStyle(
-                                                color: Colors.grey[600]),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ForgetPassword(),
+                                              ));
+                                            },
+                                            child: const Text(
+                                              'Forgot Password?',
+                                              style:
+                                                  TextStyle(color: kTextColor2),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -198,12 +225,11 @@ class _SignInState extends State<SignIn> {
                                   color: Colors.grey[400],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Text(
                                   "Don't have an account yet? ",
-                                  style: TextStyle(color: Colors.grey[700]),
+                                  style: TextStyle(color: kTextColor2),
                                 ),
                               ),
                               Expanded(

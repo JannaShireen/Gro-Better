@@ -10,7 +10,7 @@ class ProfilePic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-        radius: 50,
+        radius: 40,
         backgroundImage: AssetImage(
           "assets/images/$imageUrl",
         ));

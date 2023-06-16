@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const kPrimaryColor = Color(0xFF0C9869);
+
 const kTextColor = Color(0xFF3C4046);
+const kTextColor2 = Colors.white;
+const kButtonColor = Color.fromARGB(255, 234, 140, 140);
 const kBackgroundColor = Color.fromARGB(248, 63, 113, 91);
 const kWidth10 = SizedBox(
   width: 10,
+);
+const TextStyle textStyle2 = TextStyle(
+  fontWeight: FontWeight.w300,
+  color: kTextColor2,
+  fontSize: 16,
 );
 const kHeight10 = SizedBox(height: 10);
 
@@ -20,6 +28,8 @@ const gradientColor = LinearGradient(
       Color.fromARGB(255, 53, 218, 146),
       Color.fromARGB(255, 53, 92, 95)
     ]);
+TextStyle appBarTitleText = const TextStyle(
+    color: kTextColor2, fontWeight: FontWeight.bold, fontSize: 42);
 final TextStyle headingTextStyle = GoogleFonts.lato(
     fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
 //GoogleFonts.lato(

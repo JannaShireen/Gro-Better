@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gro_better/screens/experts/widgets/doctor_profile.dart';
 import 'package:gro_better/shared/constants.dart';
-import 'package:gro_better/shared/widgets/profile_pic.dart';
 
 import 'widgets/doctor_short_bio.dart';
 
@@ -105,11 +104,12 @@ class _DoctorsListState extends State<DoctorsList> {
               textInputAction: TextInputAction.search,
               autofocus: false,
             ),
+            kHeight10,
             Expanded(
               child: GridView.builder(
                 itemCount: 6,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
+                    crossAxisCount: 2, childAspectRatio: 1),
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
