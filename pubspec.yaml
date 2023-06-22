@@ -43,6 +43,8 @@ dependencies:
   google_fonts: ^4.0.4
   flutter_icons: ^1.1.0
   flutter_rating_bar: ^4.0.1
+  csc_picker: ^0.2.7
+  intl: ^0.18.1
   
 
 dev_dependencies:
