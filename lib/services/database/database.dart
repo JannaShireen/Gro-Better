@@ -19,4 +19,8 @@ class DatabaseService {
       'Email': email,
     });
   }
+
+  Stream<QuerySnapshot> get users {
+    return userCollection.snapshots();
+  }
 }

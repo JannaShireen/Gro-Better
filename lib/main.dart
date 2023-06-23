@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gro_better/model/user.dart';
+import 'package:gro_better/provider/form.dart';
+import 'package:gro_better/provider/home_state.dart';
 import 'package:gro_better/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gro_better/services/auth.dart';
@@ -19,9 +21,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<UserModel?>.value(
-      initialData: null,
-      value: AuthService().userlog,
+    return MultiProvider(
+      providers: [
+        StreamProvider<UserModel?>.value(
+            value: AuthService().userlog, initialData: null),
+        ChangeNotifierProvider<RegisterUserState>(
+            create: (context) => RegisterUserState()),
+        ChangeNotifierProvider<HomeState>(create: (context) => HomeState()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Gro Better',
