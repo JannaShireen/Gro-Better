@@ -1,30 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gro_better/services/database/database.dart';
+import 'package:gro_better/shared/constants.dart';
 
-class CreatePostWidget extends StatefulWidget {
-  const CreatePostWidget({super.key});
+class CreatePostWidget extends StatelessWidget {
+  CreatePostWidget({super.key});
 
-  @override
-  _CreatePostWidgetState createState() => _CreatePostWidgetState();
-}
-
-class _CreatePostWidgetState extends State<CreatePostWidget> {
   final TextEditingController _textEditingController = TextEditingController();
 
-  void _submitPost() {
-    // Perform the action when the post button is pressed
-    String postContent = _textEditingController.text;
-    // Process the post content, save to database, etc.
-    // Clear the input field
-    _textEditingController.clear();
-  }
-
-  @override
-  void dispose() {
-    // Dispose the text editing controller when the widget is disposed
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
+  // void submitPost() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +34,26 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
               height: 14,
             ),
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  try {
+                    submitPost();
+                    // Show a SnackBar with the success message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Status updated successfully'),
+                      ),
+                    );
+                    Navigator.of(context).pop();
+                  } catch (e) {
+                    print('Error posting status: $e');
+                    // Show a SnackBar with the error message
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Error updating status'),
+                      ),
+                    );
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 26, 62, 28)),
                 icon: const Icon(Icons.post_add_rounded),
@@ -60,5 +62,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
         ),
       ),
     );
+  }
+
+  void submitPost() {
+    var postContent = _textEditingController.text;
+    DatabaseService(uid: currentuserId).postStatus(postContent);
   }
 }

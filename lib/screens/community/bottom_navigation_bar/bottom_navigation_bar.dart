@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:gro_better/provider/home_state.dart';
+import 'package:gro_better/services/auth.dart';
 
 import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +10,9 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    //  final currentuserId = FirebaseAuth.instance.currentUser!.uid;
+    final AuthService auth = AuthService();
+
     return Consumer<HomeState>(
       builder: (context, bottomNavState, _) {
         return Scaffold(

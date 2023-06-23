@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final currentuserId = FirebaseAuth.instance.currentUser!.uid;
 const kPrimaryColor = Color(0xFF0C9869);
 
 const kTextColor = Color(0xFF3C4046);
