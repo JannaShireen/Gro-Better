@@ -16,14 +16,14 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = AuthService();
-    UserDetails userInfo = Provider.of<UserProvider>(context).getUser;
+    UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         elevation: 0.0,
         title: Text(
-          '@${userInfo.email}',
+          '@${userInfo?.email} ',
           //  ' ${user.email}',
           //' ${document!['Email']}'.split("@")[0],
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(

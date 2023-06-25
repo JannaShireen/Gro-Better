@@ -12,35 +12,37 @@ class UserDetails {
   List<String> sessionNotes = [];
   List<String> posts = [];
   List<String> comments = [];
+  UserDetails({
+    required this.uid,
+    required this.name,
+    required this.email,
+    required this.dob,
+    this.bioNotes,
+    this.nationality,
+    this.sessionCount,
+    this.imageUrl = "",
+    List<String> sessionNotes = const [],
+    List<String> posts = const [],
+    List<String> comments = const [],
+  })  : sessionNotes = sessionNotes,
+        posts = posts,
+        comments = comments;
 
-  // Add more properties as needed
-
-  UserDetails(
-      {required this.uid,
-      required this.name,
-      required this.email,
-      required this.dob,
-      this.bioNotes,
-      this.nationality,
-      this.sessionCount,
-      this.imageUrl = "",
-      this.sessionNotes = const [],
-      this.posts = const [],
-      this.comments = const []});
-
-  Map<String, dynamic> toJson() => {
-        "UserID": uid,
-        "Name": name,
-        "Username": email,
-        "DateOfBirth": dob,
-        "BioNotes": bioNotes,
-        "Nationality": nationality,
-        "SessionCount": sessionCount,
-        "SessionNotes": sessionNotes,
-        "Posts": posts,
-        "Comments": comments,
-        "imageUrl": imageUrl,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      "UserID": uid,
+      "Name": name,
+      "Username": email,
+      "DateOfBirth": dob,
+      "BioNotes": bioNotes,
+      "Nationality": nationality,
+      "SessionCount": sessionCount,
+      "SessionNotes": sessionNotes,
+      "Posts": posts,
+      "Comments": comments,
+      "imageUrl": imageUrl,
+    };
+  }
 
   static UserDetails fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;

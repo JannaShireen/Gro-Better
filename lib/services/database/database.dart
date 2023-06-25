@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:gro_better/model/post.dart';
 import 'package:gro_better/model/user_info.dart';
-import 'package:gro_better/shared/constants.dart';
 
 class DatabaseService {
   final String uid;
@@ -69,43 +68,32 @@ class DatabaseService {
       // Get the reference to the user document in the "users" collection
       DocumentReference userRef = userCollection.doc(userId);
 
-      // Update the "statusReferences" field using the FieldValue.arrayUnion() method
-      await userRef.update({
+      // Get the user document data
+      DocumentSnapshot userSnapshot = await userRef.get();
+      Map<String, dynamic> userData =
+          userSnapshot.data() as Map<String, dynamic>;
+
+      // Create a new map for the updated "statusReferences" field
+      Map<String, dynamic> updatedData = {
         'statusReferences':
             FieldValue.arrayUnion([_postsCollection.doc(statusId)]),
-      });
+      };
+
+      // If the user has a "postedBy" field, add the statusId to it
+      // if (userData.containsKey('postedBy')) {
+      //   updatedData['postedBy'] = FieldValue.arrayUnion([statusId]);
+      // } else {
+      //   updatedData['postedBy'] = [statusId];
+      // }
+
+      // Update the user document with the new data
+      await userRef.update(updatedData);
     } catch (error) {
       print('Error updating status reference in user: $error');
     }
   }
 
-  // void postStatus(status) async {
-  //   try {
-  //     // Create a new document with a unique ID in the "statuses" collection
-
-  //     // Set the fields for the status document
-  //     await statusRef.set({
-  //       'userId': currentuserId,
-  //       'status': status,
-  //       'timestamp': FieldValue.serverTimestamp(),
-  //     });
-  //     // ScaffoldMessenger.of(context).showSnackBar(
-  //     //   const SnackBar(
-  //     //     content: Text('Status updated successfully'),
-  //     //   ),
-  //     // );
-
-  //     print('Status posted successfully!');
-  //   } catch (error) {
-  //     // ScaffoldMessenger.of(context).showSnackBar(
-  //     //   const SnackBar(
-  //     //     content: Text('Error updating status'),
-  //     //   ),
-  //     // );
-  //     print('Error posting status: $error');
-  //   }
-  // }
-
+  //
   Stream<QuerySnapshot> get users {
     return userCollection.snapshots();
   }

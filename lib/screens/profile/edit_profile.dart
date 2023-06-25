@@ -22,7 +22,7 @@ class _EditProfileState extends State<EditProfile> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     String selectedCountry = '';
-    UserDetails userInfo = Provider.of<UserProvider>(context).getUser;
+    UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,

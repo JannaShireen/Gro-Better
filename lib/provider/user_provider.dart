@@ -7,7 +7,7 @@ class UserProvider with ChangeNotifier {
   UserDetails? _user;
   final DatabaseService db = DatabaseService(uid: currentuserId);
 
-  UserDetails get getUser => _user!;
+  UserDetails? get getUser => _user;
 
   Future<void> refreshUser() async {
     UserDetails user = await db.getUserDetails();

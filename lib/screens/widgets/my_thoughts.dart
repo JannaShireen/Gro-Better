@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gro_better/screens/community/widgets/post_status.dart';
 import 'package:gro_better/shared/constants.dart';
 
 class ThoughtsTab extends StatelessWidget {
@@ -17,7 +18,10 @@ class ThoughtsTab extends StatelessWidget {
         ElevatedButton(
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(kButtonColor)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CreatePostWidget()));
+            },
             child: const Text(
               'Share your thoughts',
               style: TextStyle(color: kBackgroundColor),

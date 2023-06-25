@@ -12,7 +12,7 @@ class TopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserDetails userInfo = Provider.of<UserProvider>(context).getUser;
+    UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
     return Container(
       padding: const EdgeInsets.all(20),
       child: Row(
@@ -25,7 +25,7 @@ class TopSection extends StatelessWidget {
           Column(
             children: [
               Text(
-                ' ${userInfo.name}',
+                ' ${userInfo?.name}',
                 //'${document['name']}',
                 style: const TextStyle(
                   fontSize: 27,
@@ -35,7 +35,7 @@ class TopSection extends StatelessWidget {
               ),
               kHeight10,
               Text(
-                'Born on ${'${userInfo.dob}'.split(" ")[0]}',
+                'Born on ${'${userInfo?.dob}'.split(" ")[0]}',
                 //  'DOB: ${'${document['DOB']}.'.split(" ")[0]}',
                 style: textStyle2,
               ),
@@ -47,8 +47,8 @@ class TopSection extends StatelessWidget {
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(kButtonColor)),
                 onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: ((context) => EditProfile())));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => const EditProfile())));
                 },
                 child: const Text('Edit Profile'),
               ),

@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gro_better/model/user_info.dart';
 import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/screens/community/widgets/post_status.dart';
+import 'package:gro_better/screens/community/widgets/post_view.dart';
 import 'package:gro_better/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,7 @@ class CommunityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserDetails userInfo = Provider.of<UserProvider>(context).getUser;
+    UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
     Size size = MediaQuery.of(context).size;
 
     // UserDetails document = UserDetails.fromMap(snapshot.data);
@@ -56,7 +57,7 @@ class CommunityScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Welcome, ${userInfo.name}!',
+                        'Welcome, ${userInfo?.name ?? ''}!',
                         style: textStyle2,
                       ),
                       kHeight30,
@@ -124,7 +125,7 @@ class CommunityScreen extends StatelessWidget {
               ),
 
               kHeight20,
-              // const Expanded(child: PostViewWidget()),
+              const Expanded(child: PostViewWidget()),
               //
             ],
           ),

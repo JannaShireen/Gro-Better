@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gro_better/model/user_info.dart';
 
 class Post {
   final String username;
   final String content;
   final bool isAnonymous;
 
-  final Timestamp timeStamp;
+  final Timestamp timeStamp; // Change the type to int
+
   bool isLiked;
   int likeCount;
   bool isSaved;
@@ -26,7 +26,7 @@ class Post {
       'username': username,
       'content': content,
       'isAnonymous': isAnonymous,
-      'timestamp': timeStamp.millisecondsSinceEpoch,
+      'timestamp': timeStamp,
       'isLiked': isLiked,
       'likeCount': likeCount,
       'isSaved': isSaved,
@@ -38,7 +38,7 @@ class Post {
     return Post(
       username: data['username'] ?? " ",
       content: data['content'] ?? '',
-      timeStamp: data['timestamp'].toDate(),
+      timeStamp: data['timestamp'], // Convert to int
       isAnonymous: data['isAnonymous'] ?? false,
       isLiked: data['isLiked'] ?? false,
       likeCount: data['likeCount'] ?? 0,
