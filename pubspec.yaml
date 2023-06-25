@@ -45,6 +45,9 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   csc_picker: ^0.2.7
   intl: ^0.18.1
+  country_picker: ^2.0.20
+  image_picker: ^0.8.9
+  firebase_storage: ^11.2.3
   
 
 dev_dependencies:

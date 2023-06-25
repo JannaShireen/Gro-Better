@@ -51,3 +51,12 @@ const DividerTeal = Divider(
   height: 10,
   color: Colors.tealAccent,
 );
+
+const nationalityText = Text(
+  'Nationality:',
+  style: textStyle2,
+);
+const bioText = Text(
+  'Bio:',
+  style: textStyle2,
+);

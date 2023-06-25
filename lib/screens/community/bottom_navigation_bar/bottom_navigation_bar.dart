@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 
 import 'package:gro_better/provider/home_state.dart';
+import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/services/auth.dart';
 
 import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    addData();
+  }
+
+  addData() async {
+    UserProvider userProvider = Provider.of(context, listen: false);
+    await userProvider.refreshUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     //  final currentuserId = FirebaseAuth.instance.currentUser!.uid;

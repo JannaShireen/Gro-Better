@@ -23,14 +23,9 @@ extension GenderExtension on Gender {
 class RegisterUserState extends ChangeNotifier {
   final AuthService _auth = AuthService();
 
-  Gender _gender = Gender.Male;
+  final Gender _gender = Gender.Male;
 
   Gender get gender => _gender;
-
-  void updateGender(Gender newGender) {
-    _gender = newGender;
-    notifyListeners();
-  }
 
   bool loading = false;
   String error = '';
@@ -38,8 +33,8 @@ class RegisterUserState extends ChangeNotifier {
   String password = '';
   String confirmPassword = '';
   String name = '';
-  int? age;
-  DateTime? date;
+
+  DateTime date = DateTime.now();
   // Gender gender = Gender.Male;
   final formKey = GlobalKey<FormState>();
 
@@ -49,11 +44,10 @@ class RegisterUserState extends ChangeNotifier {
       notifyListeners();
 
       dynamic result = await _auth.registerWithEmailAndPassword(
+        name,
         email,
         password,
-        name,
-        gender.value,
-        date!,
+        date,
       );
 
       loading = false;
