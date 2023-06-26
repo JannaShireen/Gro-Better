@@ -65,6 +65,7 @@ class DatabaseService {
   Future<void> updateStatusReferenceInUser(
       String userId, String statusId) async {
     try {
+      print("printing userID $userId");
       // Get the reference to the user document in the "users" collection
       DocumentReference userRef = userCollection.doc(userId);
 

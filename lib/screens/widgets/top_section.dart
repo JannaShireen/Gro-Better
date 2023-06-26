@@ -41,6 +41,8 @@ class TopSection extends StatelessWidget {
               ),
               kHeight20,
 
+              // Text(' Nationaity: ${userInfo?.nationality.toString()} '),
+
               // Text('DOB:  ${document['DOB']}', style: textStyle2),
               // const SizedBox(height: 10),
               ElevatedButton(

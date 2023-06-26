@@ -3,6 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:gro_better/model/user.dart';
 import 'package:gro_better/model/user_info.dart';
 import 'package:gro_better/services/database/database.dart';
+import 'package:gro_better/shared/constants.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -50,6 +51,7 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+      currentuserId = user!.uid;
       return _userFromCredential(user);
     } catch (e) {
       print(e.toString());
