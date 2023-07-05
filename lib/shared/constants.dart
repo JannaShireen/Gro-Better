@@ -33,7 +33,7 @@ const gradientColor = LinearGradient(
 TextStyle appBarTitleText = const TextStyle(
     color: kTextColor2, fontWeight: FontWeight.bold, fontSize: 42);
 final TextStyle headingTextStyle = GoogleFonts.lato(
-    fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+    fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
 //GoogleFonts.lato(
 //fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20);
 const textInputDecoration = InputDecoration(

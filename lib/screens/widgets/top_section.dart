@@ -39,6 +39,12 @@ class TopSection extends StatelessWidget {
                 //  'DOB: ${'${document['DOB']}.'.split(" ")[0]}',
                 style: textStyle2,
               ),
+              kHeight10,
+
+              Text(
+                'Bio: ${userInfo?.bioNotes ?? ' '}',
+                style: textStyle2,
+              ),
               kHeight20,
 
               // Text(' Nationaity: ${userInfo?.nationality.toString()} '),

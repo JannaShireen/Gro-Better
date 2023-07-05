@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gro_better/screens/experts/widgets/doctor_short_bio.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gro_better/model/experts.dart';
 import 'package:gro_better/shared/constants.dart';
-import 'package:gro_better/shared/widgets/profile_pic.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DoctorProfile extends StatelessWidget {
-  const DoctorProfile({super.key});
+  ExpertInfo expert;
+  DoctorProfile({required this.expert, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +44,32 @@ class DoctorProfile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: const EdgeInsets.only(left: 7, top: 12),
                       child: Row(
-                        children: const [
-                          ProfilePic(imageUrl: 'ryan_reynolds.webp'),
+                        children: [
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.28,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: Image.network(
+                                expert.imageUrl,
+                                fit: BoxFit.cover,
+                              )),
                           kWidth10,
-                          DrBioNotes(),
+                          Column(
+                            children: [
+                              Text(
+                                expert.name,
+                                style: headingTextStyle,
+                              ),
+                              kHeight10,
+                              Text(
+                                expert.category,
+                                style: GoogleFonts.lato(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -65,7 +85,7 @@ class DoctorProfile extends StatelessWidget {
                               color: kDefaultIconLightColor,
                             ),
                             padding: const EdgeInsets.all(10),
-                            child: const Text('702 Sessions'),
+                            child: Text('${expert.sessionCount} sessions'),
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -80,61 +100,61 @@ class DoctorProfile extends StatelessWidget {
                     ),
                     DividerTeal,
                     kHeight10,
-                    Text('What can I help you achieve:',
-                        style: headingTextStyle),
-                    kHeight20,
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 3,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                      ),
-                      itemBuilder: (context, index) {
-                        // Define different content for each card based on the index
-                        IconData iconData;
-                        String text;
-                        switch (index) {
-                          case 0:
-                            iconData = Icons.alarm;
-                            text = 'Time Management';
-                            break;
-                          case 1:
-                            iconData = CupertinoIcons.briefcase_fill;
-                            text = 'Career Guidance';
-                            break;
-                          case 2:
-                            iconData = CupertinoIcons.heart_fill;
-                            text = 'Relationship ';
-                            break;
-                          default:
-                            iconData = Icons.error;
-                            text = 'Unknown';
-                        }
+                    // Text('What can I help you achieve:',
+                    //     style: headingTextStyle),
+                    // kHeight20,
+                    // GridView.builder(
+                    //   shrinkWrap: true,
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   itemCount: 3,
+                    //   gridDelegate:
+                    //       const SliverGridDelegateWithFixedCrossAxisCount(
+                    //     crossAxisCount: 3,
+                    //   ),
+                    //   itemBuilder: (context, index) {
+                    //     // Define different content for each card based on the index
+                    //     IconData iconData;
+                    //     String text;
+                    //     switch (index) {
+                    //       case 0:
+                    //         iconData = Icons.alarm;
+                    //         text = 'Time Management';
+                    //         break;
+                    //       case 1:
+                    //         iconData = CupertinoIcons.briefcase_fill;
+                    //         text = 'Career Guidance';
+                    //         break;
+                    //       case 2:
+                    //         iconData = CupertinoIcons.heart_fill;
+                    //         text = 'Relationship ';
+                    //         break;
+                    //       default:
+                    //         iconData = Icons.error;
+                    //         text = 'Unknown';
+                    //     }
 
-                        return Card(
-                          elevation: 3,
-                          color: kBackgroundColor,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                iconData,
-                                size: 40,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                text,
-                                style: const TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
+                    //     return Card(
+                    //       elevation: 3,
+                    //       color: kBackgroundColor,
+                    //       child: Column(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           Icon(
+                    //             iconData,
+                    //             size: 40,
+                    //             color: Colors.white,
+                    //           ),
+                    //           const SizedBox(height: 10),
+                    //           Text(
+                    //             text,
+                    //             style: const TextStyle(
+                    //                 fontSize: 16, color: Colors.white),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
 
                     kHeight10,
                     Text(
@@ -142,9 +162,9 @@ class DoctorProfile extends StatelessWidget {
                       style: headingTextStyle,
                     ),
                     kHeight10,
-                    const Text(
-                      "Hey, I am Ryan, a passionate Mental Health Professional specializing in Counseling Psychology. Being an adolescent can be tough and it comes with its own unique changes and obstacles. I think they deserve a helping hand which is why I love walking through the life journey with them and helping them maximize their potential. ",
-                      style: TextStyle(color: Colors.white, fontSize: 17),
+                    Text(
+                      "Hey, I am ${expert.name}, a passionate Mental Health Professional specializing in Counseling Psychology. Being an adolescent can be tough and it comes with its own unique changes and obstacles. I think they deserve a helping hand which is why I love walking through the life journey with them and helping them maximize their potential. ",
+                      style: const TextStyle(color: Colors.white, fontSize: 17),
                     ),
                     kHeight20,
                     Text(
@@ -152,20 +172,20 @@ class DoctorProfile extends StatelessWidget {
                       style: headingTextStyle,
                     ),
                     kHeight10,
-                    const Text(
-                      '♦️ How do I manage my time and schedule?',
-                      style: TextStyle(color: Colors.white),
+                    Text(
+                      '♦️ ${expert.question1}',
+                      style: const TextStyle(color: Colors.white, fontSize: 17),
                     ),
                     kHeight10,
-                    const Text('♦️ How do I plan for my career?',
-                        style: TextStyle(color: Colors.white)),
+                    Text('♦️ ${expert.question2}',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 17)),
                     kHeight10,
-                    const Text('♦️ How do I become more efficient?',
-                        style: TextStyle(color: Colors.white)),
+                    Text('♦️ ${expert.question3}',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 17)),
                     kHeight10,
-                    const Text('♦️ How do I become more self-aware? ',
-                        style: TextStyle(color: Colors.white)),
-                    kHeight20,
+
                     Text(
                       'User Reviews',
                       style: headingTextStyle,
@@ -299,7 +319,7 @@ class DoctorProfile extends StatelessWidget {
                 // Action when the button is pressed
               },
               child: const Text(
-                'Connect',
+                'Book Appoinment',
                 style: TextStyle(
                     fontSize: 17,
                     color: kBackgroundColor,

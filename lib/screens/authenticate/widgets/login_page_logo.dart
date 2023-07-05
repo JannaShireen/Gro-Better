@@ -8,8 +8,8 @@ class LoginPageLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 180,
-      height: 180,
+      width: MediaQuery.of(context).size.width * 0.64,
+      height: MediaQuery.of(context).size.height * 0.26,
       child: ClipRRect(
         borderRadius:
             BorderRadius.circular(20), // Adjust the border radius as needed

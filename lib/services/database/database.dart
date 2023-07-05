@@ -80,13 +80,6 @@ class DatabaseService {
             FieldValue.arrayUnion([_postsCollection.doc(statusId)]),
       };
 
-      // If the user has a "postedBy" field, add the statusId to it
-      // if (userData.containsKey('postedBy')) {
-      //   updatedData['postedBy'] = FieldValue.arrayUnion([statusId]);
-      // } else {
-      //   updatedData['postedBy'] = [statusId];
-      // }
-
       // Update the user document with the new data
       await userRef.update(updatedData);
     } catch (error) {

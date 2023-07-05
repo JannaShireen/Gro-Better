@@ -27,234 +27,245 @@ class _SignInState extends State<SignIn> {
     Size size = MediaQuery.of(context).size;
     return loading
         ? Loading()
-        : Scaffold(
-            //  backgroundColor: Colors.brown[100],
-            appBar: AppBar(
-                backgroundColor: kPrimaryColor,
-                elevation: 0.0,
-                centerTitle: true,
-                title: Text(
-                  'Gro Better',
-                  style: appBarTitleText,
-                )
-                //   style: Theme.of(context)
-                //       .textTheme
-                //       .headlineMedium!
-                //       .copyWith(color: kTextColor2, fontWeight: FontWeight.bold),
-                // ),
-                ),
+        : LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return Scaffold(
+                //  backgroundColor: Colors.brown[100],
+                appBar: AppBar(
+                    backgroundColor: kPrimaryColor,
+                    elevation: 0.0,
+                    centerTitle: true,
+                    title: Text(
+                      'Gro Better',
+                      style: appBarTitleText,
+                    )
+                    //   style: Theme.of(context)
+                    //       .textTheme
+                    //       .headlineMedium!
+                    //       .copyWith(color: kTextColor2, fontWeight: FontWeight.bold),
+                    // ),
+                    ),
 
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(height: 30),
+                body: SafeArea(
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(height: 30),
 
-                        // logo
-                        const LoginPageLogo(),
+                            // logo
+                            const LoginPageLogo(),
 
-                        kHeight30,
+                            kHeight30,
 
-                        // welcome back, you've been missed!
-                        const Text('Welcome! Sign In to get better',
-                            style: textStyle2),
+                            // welcome back, you've been missed!
+                            const Text('Welcome! Sign In to get better',
+                                style: textStyle2),
 
-                        kHeight20,
-                        Container(
-                          margin: const EdgeInsets.all(20),
-                          child: Form(
-                              key: _formKey,
-                              child: Center(
-                                child: Column(
-                                  children: <Widget>[
-                                    // username textfield
-                                    TextFormFieldWidget(
-                                      hintText: 'Email or Username',
-                                      validator: (val) {
-                                        val!.isEmpty ? 'Enter an email' : null;
-                                        return null;
-                                      },
-                                      onChanged: (val) {
-                                        setState(() {
-                                          email = val;
-                                        });
-                                      },
-                                    ),
-                                    // TextFormField(
-                                    //   decoration: textInputDecoration.copyWith(
-                                    //       hintText: 'Email or Username'),
-                                    //   validator: (val) => val!.isEmpty
-                                    //       ? 'Enter an email'
-                                    //       : null,
-                                    //   onChanged: (val) {
-                                    //     setState(() {
-                                    //       email = val;
-                                    //     });
-                                    //   },
-                                    // ),
-
-                                    kHeight10,
-
-                                    // password textfield
-                                    TextFormFieldWidget(
-                                      hintText: 'Password',
-                                      validator: (val) => val!.length < 6
-                                          ? 'Password must be at least 6 characters long'
-                                          : null,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          password = val;
-                                        });
-                                      },
-                                      obscureText: true,
-                                    ),
-
-                                    // TextFormField(
-                                    //   decoration: textInputDecoration.copyWith(
-                                    //       hintText: 'Password'),
-                                    //   validator: (value) => value!.length < 6
-                                    //       ? 'Password must be at least 6 characters long'
-                                    //       : null,
-                                    //   obscureText: true,
-                                    //   onChanged: (value) {
-                                    //     setState(() {
-                                    //       password = value;
-                                    //     });
-                                    //   },
-                                    // ),
-
-                                    const SizedBox(height: 10),
-
-                                    // forgot password?
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 25.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ForgetPassword(),
-                                              ));
-                                            },
-                                            child: const Text(
-                                              'Forgot Password?',
-                                              style:
-                                                  TextStyle(color: kTextColor2),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 20),
-
-                                    // sign in button
-                                    SizedBox(
-                                      width: 150,
-                                      child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor: kPrimaryColor),
-                                          onPressed: () async {
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              setState(() {
-                                                loading = true;
-                                              });
-                                              dynamic result = await _auth
-                                                  .signEmailAndPassword(
-                                                      email, password);
-                                              if (result == null) {
-                                                setState(() {
-                                                  error =
-                                                      'Wrong Username or Password';
-                                                  loading = false;
-                                                });
-                                              }
-                                            }
+                            kHeight20,
+                            Container(
+                              margin: const EdgeInsets.all(20),
+                              child: Form(
+                                  key: _formKey,
+                                  child: Center(
+                                    child: Column(
+                                      children: <Widget>[
+                                        // username textfield
+                                        TextFormFieldWidget(
+                                          hintText: 'Email or Username',
+                                          validator: (val) {
+                                            val!.isEmpty
+                                                ? 'Enter an email'
+                                                : null;
+                                            return null;
                                           },
-                                          child: const Text('Sign In')),
+                                          onChanged: (val) {
+                                            setState(() {
+                                              email = val;
+                                            });
+                                          },
+                                        ),
+                                        // TextFormField(
+                                        //   decoration: textInputDecoration.copyWith(
+                                        //       hintText: 'Email or Username'),
+                                        //   validator: (val) => val!.isEmpty
+                                        //       ? 'Enter an email'
+                                        //       : null,
+                                        //   onChanged: (val) {
+                                        //     setState(() {
+                                        //       email = val;
+                                        //     });
+                                        //   },
+                                        // ),
+
+                                        kHeight10,
+
+                                        // password textfield
+                                        TextFormFieldWidget(
+                                          hintText: 'Password',
+                                          validator: (val) => val!.length < 6
+                                              ? 'Password must be at least 6 characters long'
+                                              : null,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              password = val;
+                                            });
+                                          },
+                                          obscureText: true,
+                                        ),
+
+                                        // TextFormField(
+                                        //   decoration: textInputDecoration.copyWith(
+                                        //       hintText: 'Password'),
+                                        //   validator: (value) => value!.length < 6
+                                        //       ? 'Password must be at least 6 characters long'
+                                        //       : null,
+                                        //   obscureText: true,
+                                        //   onChanged: (value) {
+                                        //     setState(() {
+                                        //       password = value;
+                                        //     });
+                                        //   },
+                                        // ),
+
+                                        const SizedBox(height: 10),
+
+                                        // forgot password?
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 25.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context)
+                                                      .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const ForgetPassword(),
+                                                  ));
+                                                },
+                                                child: const Text(
+                                                  'Forgot Password?',
+                                                  style: TextStyle(
+                                                      color: kTextColor2),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: constraints.maxWidth * 0.1,
+                                        ),
+                                        //  const SizedBox(height: 20),
+
+                                        // sign in button
+                                        SizedBox(
+                                          width: 150,
+                                          child: ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      kPrimaryColor),
+                                              onPressed: () async {
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  setState(() {
+                                                    loading = true;
+                                                  });
+                                                  dynamic result = await _auth
+                                                      .signEmailAndPassword(
+                                                          email, password);
+                                                  if (result == null) {
+                                                    setState(() {
+                                                      error =
+                                                          'Wrong Username or Password';
+                                                      loading = false;
+                                                    });
+                                                  }
+                                                }
+                                              },
+                                              child: const Text('Sign In')),
+                                        ),
+
+                                        Text(
+                                          error,
+                                          style: const TextStyle(
+                                              color: Colors.red, fontSize: 14),
+                                        )
+                                      ],
                                     ),
-
-                                    Text(
-                                      error,
-                                      style: const TextStyle(
-                                          color: Colors.red, fontSize: 14),
-                                    )
-                                  ],
-                                ),
-                              )),
-                        ),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            AuthService().SignInWithGoogle();
-                            // _SignInWithGoogle(context);
-                          },
-                          icon: Image.asset(
-                            'assets/images/google.png',
-                            height: 24.0,
-                            width: 24.0,
-                          ),
-                          label: const Text('Sign in with Google Account'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                                  )),
                             ),
-                          ),
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                AuthService().SignInWithGoogle();
+                                // _SignInWithGoogle(context);
+                              },
+                              icon: Image.asset(
+                                'assets/images/google.png',
+                                height: 24.0,
+                                width: 24.0,
+                              ),
+                              label: const Text('Sign in with Google Account'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                            ),
+                            kHeight20,
+
+                            // Don't have an account?
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Divider(
+                                      thickness: 0.5,
+                                      color: Colors.grey[400],
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10.0),
+                                    child: Text(
+                                      "Don't have an account yet? ",
+                                      style: TextStyle(color: kTextColor2),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Divider(
+                                      thickness: 0.5,
+                                      color: Colors.grey[400],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            //  kHeight20,
+
+                            TextButton(
+                                onPressed: () {
+                                  widget.toggleView();
+                                },
+                                child: const Text('Register here')),
+                          ],
                         ),
-                        kHeight20,
-
-                        // Don't have an account?
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Divider(
-                                  thickness: 0.5,
-                                  color: Colors.grey[400],
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Text(
-                                  "Don't have an account yet? ",
-                                  style: TextStyle(color: kTextColor2),
-                                ),
-                              ),
-                              Expanded(
-                                child: Divider(
-                                  thickness: 0.5,
-                                  color: Colors.grey[400],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        //  kHeight20,
-
-                        TextButton(
-                            onPressed: () {
-                              widget.toggleView();
-                            },
-                            child: const Text('Register here')),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
+              );
+            },
           );
   }
 }
