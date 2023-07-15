@@ -4,10 +4,35 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:gro_better/model/experts.dart';
 import 'package:gro_better/screens/experts/widgets/doctor_profile.dart';
+import 'package:gro_better/screens/experts/widgets/doctor_search.dart';
 import 'package:gro_better/shared/constants.dart';
 
 class DoctorsList extends StatelessWidget {
   const DoctorsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: kTextColor,
+        appBar: AppBar(
+          backgroundColor: kBackgroundColor,
+          title: const Text('Experts'),
+          centerTitle: true,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const DoctorSearchPage()));
+              },
+              icon: const Icon(Icons.search)),
+        ),
+        body: const ListofDoctors());
+  }
+}
+
+class ListofDoctors extends StatelessWidget {
+  const ListofDoctors({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +64,9 @@ class DoctorsList extends StatelessWidget {
                     },
                     child: Card(
                       color: kBackgroundColor,
-                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                      elevation: 8,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(

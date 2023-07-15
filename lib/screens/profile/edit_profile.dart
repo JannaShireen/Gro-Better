@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:gro_better/model/user_info.dart';
@@ -5,6 +7,7 @@ import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/screens/authenticate/widgets/text_form_field.dart';
 import 'package:gro_better/services/database/database.dart';
 import 'package:gro_better/shared/constants.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class EditProfile extends StatefulWidget {
@@ -39,27 +42,49 @@ class _EditProfileState extends State<EditProfile> {
               children: [
                 kHeight30,
                 // Profile picture picker
-                // Center(
-                //   child: SizedBox(
-                //     height: 150,
-                //     width: 150,
-                //     child: Image.asset(
-                //       'assets/images/empty-user.png',
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ),
-                // ),
+                Center(
+                  child: SizedBox(
+                    height: 150,
+                    width: 150,
+                    child: Image.asset(
+                      'assets/images/empty-user.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
 
-                // ElevatedButton.icon(
-                //   style: ElevatedButton.styleFrom(
-                //     backgroundColor: Colors.black,
-                //   ),
-                //   onPressed: () {
-                //     EditProfileProvider().getPhoto(context);
-                //   },
-                //   icon: const Icon(Icons.image_outlined),
-                //   label: const Text('Add An Image'),
-                // ),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                  ),
+                  onPressed: () async {
+                    final picker = ImagePicker();
+                    final pickedFile =
+                        await picker.pickImage(source: ImageSource.gallery);
+
+                    if (pickedFile != null) {
+                      File imageFile = File(pickedFile.path);
+
+                      // Call the method to update the image in Firebase Storage
+                      await DatabaseService(uid: currentuserId)
+                          .updateImageToStorage(currentuserId, imageFile);
+
+                      // Show Snackbar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Image selected successfully')),
+                      );
+                    } else {
+                      // Show Snackbar for image selection error
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('No image selected')),
+                      );
+                    }
+                    //EditProfileProvider().getPhoto(context);
+                  },
+                  icon: const Icon(Icons.image_outlined),
+                  label: const Text('Add An Image'),
+                ),
                 kHeight20,
                 bioText,
 
@@ -114,7 +139,13 @@ class _EditProfileState extends State<EditProfile> {
                       if (formKey.currentState != null &&
                           formKey.currentState!.validate()) {
                         await DatabaseService(uid: currentuserId)
-                            .editUserData(bioNotes.text, selectedCountry);
+                            .editUserData(bioNotes.text, selectCountryText);
+                        // Show Snackbar
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Edited successfully')),
+                        );
+                        // Navigate back to profile page
+                        Navigator.pop(context);
                       }
                     },
                     child: const Text('Done')),

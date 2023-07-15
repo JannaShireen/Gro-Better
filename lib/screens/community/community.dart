@@ -6,6 +6,7 @@ import 'package:gro_better/screens/community/widgets/post_status.dart';
 import 'package:gro_better/screens/community/widgets/post_view.dart';
 import 'package:gro_better/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:gro_better/screens/experts/experts.dart';
 
 import '../../shared/constants.dart';
 
@@ -72,7 +73,10 @@ class CommunityScreen extends StatelessWidget {
                                   color: Colors.white)),
                         ),
                         TextButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const DoctorsList()));
+                            },
                             icon: const Icon(
                               Icons.calendar_month_outlined,
                               color: kDefaultIconLightColor,

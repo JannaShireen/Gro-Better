@@ -60,3 +60,5 @@ const bioText = Text(
   'Bio:',
   style: textStyle2,
 );
+const kTextStyle =
+    TextStyle(fontSize: 17, color: kTextColor2, fontWeight: FontWeight.bold);
