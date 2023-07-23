@@ -6,7 +6,7 @@ class ExpertInfo {
   final String email;
   final String qualification;
   final String category;
-  double? fee;
+  final double? fee;
   final String question1;
   final String question2;
   final String question3;
@@ -66,7 +66,7 @@ class ExpertInfo {
       question2: snapshot['Question-2'],
       question3: snapshot['Question-3'],
       imageUrl: snapshot['imageUrl'],
-      fee: snapshot['fee'],
+      fee: snapshot['fee']?.toDouble(),
       about: snapshot['about'],
       fromTime: (snapshot['fromTime'] as Timestamp).toDate(),
       toTime: (snapshot['toTime'] as Timestamp).toDate(),

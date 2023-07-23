@@ -159,7 +159,7 @@ class RegisterUser extends StatelessWidget {
                               width: 150,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: kPrimaryColor,
+                                  backgroundColor: kBackgroundColor2,
                                 ),
                                 onPressed: () async {
                                   if (state.formKey.currentState!.validate()) {

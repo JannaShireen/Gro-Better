@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 var currentuserId = FirebaseAuth.instance.currentUser!.uid;
-const kPrimaryColor = Color(0xFF0C9869);
+const kPrimaryColor = Color.fromARGB(255, 66, 34, 5);
 
 const kTextColor = Color(0xFF3C4046);
 const kTextColor2 = Colors.white;
 const kButtonColor = Color.fromARGB(255, 234, 140, 140);
-const kBackgroundColor = Color.fromARGB(248, 63, 113, 91);
+const kBackgroundColor = Color.fromARGB(255, 66, 34, 5);
+const kBackgroundColor2 = Color.fromARGB(255, 191, 139, 91);
 const kWidth10 = SizedBox(
   width: 10,
 );
@@ -23,12 +24,11 @@ const kHeight20 = SizedBox(height: 20);
 const kHeight30 = SizedBox(height: 30);
 const double kDefaultPadding = 20.0;
 const gradientColor = LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
     colors: [
-      // Colors.green,
-      Color.fromARGB(255, 53, 218, 146),
-      Color.fromARGB(255, 53, 92, 95)
+      Color.fromARGB(255, 191, 139, 91),
+      Color.fromARGB(255, 66, 34, 5)
     ]);
 TextStyle appBarTitleText = const TextStyle(
     color: kTextColor2, fontWeight: FontWeight.bold, fontSize: 42);
@@ -49,7 +49,7 @@ const textInputDecoration = InputDecoration(
 );
 const DividerTeal = Divider(
   height: 10,
-  color: Colors.tealAccent,
+  color: Color.fromARGB(255, 66, 34, 5),
 );
 
 const nationalityText = Text(

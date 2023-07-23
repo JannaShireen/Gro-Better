@@ -22,7 +22,7 @@ class CommunityScreen extends StatelessWidget {
 
     // UserDetails document = UserDetails.fromMap(snapshot.data);
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      //  backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -31,39 +31,43 @@ class CommunityScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8),
                     kWidth10,
-                    Text(
-                      'Gro Better',
-                      style:
-                          Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                color: kBackgroundColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 31,
-                              ),
-                    ),
                   ],
                 ),
+
                 Container(
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(40),
                           bottomRight: Radius.circular(150),
                         ),
-                        color: Color.fromARGB(248, 64, 123, 96)),
+                        color: Color.fromARGB(255, 66, 34, 5)),
                     height: 200,
                     width: double.infinity,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Welcome, ${userInfo?.name ?? ''}!',
+                          'Gro Better',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                color: kTextColor2,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 31,
+                              ),
+                        ),
+                        kHeight20,
+                        Text(
+                          'Hello, ${userInfo?.name ?? ''}!',
                           style: textStyle2,
                         ),
-                        kHeight30,
+                        kHeight20,
                         Text(
                           'You have no scheduled appointment.',
                           style: GoogleFonts.robotoCondensed(
@@ -88,26 +92,20 @@ class CommunityScreen extends StatelessWidget {
                                     decoration: TextDecoration.underline)))
                       ],
                     )),
-                //
-
-                const SizedBox(
-                  height: 30,
-                ),
-                DividerTeal,
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
-                    height: 60,
+                    height: 40,
+                    width: MediaQuery.of(context).size.width / 1.2,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white60,
+                      color: const Color.fromARGB(255, 215, 187, 161),
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         // const ProfilePic(imageUrl: 'add-user-dp.png'),
-                        const SizedBox(
-                            width:
-                                15), // Add some spacing between the CircleAvatar and TextFormField
+                        // Add some spacing between the CircleAvatar and TextFormField
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -125,12 +123,13 @@ class CommunityScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const Icon(Icons.edit_document)
                       ],
                     ),
                   ),
                 ),
+                //
 
-                kHeight20,
                 const PostViewWidget(),
                 //
               ],

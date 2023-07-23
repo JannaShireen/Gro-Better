@@ -13,8 +13,9 @@ class DoctorsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: kTextColor,
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: kBackgroundColor,
           title: const Text('Experts'),
           centerTitle: true,
@@ -44,7 +45,7 @@ class ListofDoctors extends StatelessWidget {
                 .map((doc) => ExpertInfo.fromSnap(doc))
                 .toList();
             return Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(30.0),
               child: GridView.builder(
                 shrinkWrap: true,
                 itemCount: experts.length,
@@ -65,35 +66,33 @@ class ListofDoctors extends StatelessWidget {
                     child: Card(
                       color: kBackgroundColor,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                      elevation: 8,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.2,
-                                  child: Image.network(
-                                    expert.imageUrl,
-                                    fit: BoxFit.cover,
-                                  )),
-                              Text(
-                                expert.name,
-                                style: headingTextStyle,
-                              ),
-                              Text(
-                                expert.category,
-                                style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ]),
-                      ),
+                          borderRadius: BorderRadius.circular(25.0)),
+                      elevation: 5,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                                child: Image.network(
+                                  expert.imageUrl,
+                                  fit: BoxFit.cover,
+                                )),
+                            kHeight10,
+                            Text(
+                              expert.name,
+                              style: headingTextStyle,
+                            ),
+                            kHeight10,
+                            Text(
+                              expert.category,
+                              style: GoogleFonts.lato(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ]),
                     ),
                   );
                 },

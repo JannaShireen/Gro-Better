@@ -59,7 +59,7 @@ class _SignInState extends State<SignIn> {
                             // logo
                             const LoginPageLogo(),
 
-                            kHeight30,
+                            kHeight10,
 
                             // welcome back, you've been missed!
                             const Text('Welcome! Sign In to get better',
@@ -158,18 +158,16 @@ class _SignInState extends State<SignIn> {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: constraints.maxWidth * 0.1,
-                                        ),
+                                        kHeight10,
                                         //  const SizedBox(height: 20),
 
                                         // sign in button
                                         SizedBox(
-                                          width: 150,
+                                          width: 120,
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor:
-                                                      kPrimaryColor),
+                                                      kBackgroundColor2),
                                               onPressed: () async {
                                                 if (_formKey.currentState!
                                                     .validate()) {
@@ -253,11 +251,16 @@ class _SignInState extends State<SignIn> {
 
                             //  kHeight20,
 
-                            TextButton(
-                                onPressed: () {
-                                  widget.toggleView();
-                                },
-                                child: const Text('Register here')),
+                            SizedBox(
+                              width: 120,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: kBackgroundColor2),
+                                  onPressed: () {
+                                    widget.toggleView();
+                                  },
+                                  child: const Text('Register here')),
+                            ),
                           ],
                         ),
                       ),

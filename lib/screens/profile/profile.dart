@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: const Color.fromARGB(255, 66, 34, 5),
         elevation: 0.0,
         title: Text(
           '${userInfo?.email}'.split('@')[0],
@@ -38,33 +38,36 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const TopSection(),
-            DividerTeal,
-            DefaultTabController(
-              length: 2,
-              child: Column(
-                children: const [
-                  TabBar(
-                    tabs: [
-                      Tab(text: 'My Thoughts'),
-                      Tab(text: 'My Records'),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 500, // Adjust the height as needed
-                    child: TabBarView(
-                      children: [
-                        ThoughtsTab(),
-                        MyRecordsTab(),
+        child: Container(
+          decoration: const BoxDecoration(gradient: gradientColor),
+          child: const Column(
+            children: [
+              TopSection(),
+              DividerTeal,
+              DefaultTabController(
+                length: 2,
+                child: Column(
+                  children: [
+                    TabBar(
+                      tabs: [
+                        Tab(text: 'My Thoughts'),
+                        Tab(text: 'My Records'),
                       ],
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 500, // Adjust the height as needed
+                      child: TabBarView(
+                        children: [
+                          ThoughtsTab(),
+                          MyRecordsTab(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

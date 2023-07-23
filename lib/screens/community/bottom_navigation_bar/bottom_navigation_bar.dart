@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           bottomNavigationBar: BottomNavigationBar(
             enableFeedback: true,
-            backgroundColor: kDefaultIconLightColor,
+            backgroundColor: const Color.fromARGB(255, 191, 139, 91),
             selectedItemColor: kDefaultIconDarkColor,
             type: BottomNavigationBarType.fixed,
             items: const [
