@@ -8,7 +8,7 @@ const kPrimaryColor = Color.fromARGB(255, 66, 34, 5);
 const kTextColor = Color(0xFF3C4046);
 const kTextColor2 = Colors.white;
 const kButtonColor = Color.fromARGB(255, 234, 140, 140);
-const kBackgroundColor = Color.fromARGB(255, 66, 34, 5);
+const kBackgroundColor = Color.fromARGB(255, 213, 103, 0);
 const kBackgroundColor2 = Color.fromARGB(255, 191, 139, 91);
 const kWidth10 = SizedBox(
   width: 10,
