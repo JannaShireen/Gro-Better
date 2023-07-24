@@ -1,12 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gro_better/model/user_info.dart';
 import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/screens/community/widgets/post_status.dart';
 import 'package:gro_better/screens/community/widgets/post_view.dart';
-import 'package:gro_better/services/auth.dart';
-import 'package:provider/provider.dart';
+import 'package:gro_better/screens/community/widgets/upcoming_events.dart';
 import 'package:gro_better/screens/experts/experts.dart';
+import 'package:gro_better/services/auth.dart';
+import 'package:gro_better/services/database/booking_db.dart';
+import 'package:gro_better/shared/loading.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../shared/constants.dart';
 
@@ -15,14 +20,15 @@ class CommunityScreen extends StatelessWidget {
 
   final AuthService _auth = AuthService();
 
+  QuerySnapshot? upcomingEvent;
+
+  @override
   @override
   Widget build(BuildContext context) {
     UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
     Size size = MediaQuery.of(context).size;
 
-    // UserDetails document = UserDetails.fromMap(snapshot.data);
     return Scaffold(
-      //  backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -31,11 +37,23 @@ class CommunityScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 8),
                     kWidth10,
+                    Text(
+                      'Hello, ${userInfo?.name ?? ''}!',
+                      style: const TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return const UpcomingEvents();
+                          }));
+                        },
+                        icon: const Icon(Icons.calendar_month)),
                   ],
                 ),
 
@@ -45,7 +63,7 @@ class CommunityScreen extends StatelessWidget {
                           bottomLeft: Radius.circular(40),
                           bottomRight: Radius.circular(150),
                         ),
-                        color: Color.fromARGB(255, 66, 34, 5)),
+                        color: kPrimaryColor),
                     height: 200,
                     width: double.infinity,
                     child: Column(
@@ -63,33 +81,81 @@ class CommunityScreen extends StatelessWidget {
                               ),
                         ),
                         kHeight20,
-                        Text(
-                          'Hello, ${userInfo?.name ?? ''}!',
-                          style: textStyle2,
-                        ),
-                        kHeight20,
-                        Text(
-                          'You have no scheduled appointment.',
-                          style: GoogleFonts.robotoCondensed(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.white)),
-                        ),
-                        TextButton.icon(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const DoctorsList()));
-                            },
-                            icon: const Icon(
-                              Icons.calendar_month_outlined,
-                              color: kDefaultIconLightColor,
-                            ),
-                            label: Text('Schedule Now',
-                                style: GoogleFonts.lato(
-                                    color: kDefaultIconLightColor,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline)))
+
+                        FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                            future: FetchBookings(uId: currentuserId)
+                                .fetchFirstUpcomingBooking(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Loading();
+                              } else if (snapshot.hasError) {
+                                return Scaffold(
+                                  body: Center(
+                                    child: Text('Error: ${snapshot.error}'),
+                                  ),
+                                );
+                              } else {
+                                DocumentSnapshot<Map<String, dynamic>>?
+                                    upcomingEventSnapshot = snapshot.data;
+
+                                if (upcomingEventSnapshot == null) {
+                                  return Column(
+                                    children: [
+                                      Text(
+                                        'You have no scheduled appointment.',
+                                        style: GoogleFonts.robotoCondensed(
+                                            textStyle: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                                color: Colors.white)),
+                                      ),
+                                      TextButton.icon(
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const DoctorsList()));
+                                          },
+                                          icon: const Icon(
+                                            Icons.calendar_month_outlined,
+                                            color: kDefaultIconLightColor,
+                                          ),
+                                          label: Text('Schedule Now',
+                                              style: GoogleFonts.lato(
+                                                  color: kDefaultIconLightColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  decoration: TextDecoration
+                                                      .underline)))
+                                    ],
+                                  );
+                                } else {
+                                  String time = upcomingEventSnapshot['time'];
+                                  String day = upcomingEventSnapshot['day'];
+                                  DateTime dateTime =
+                                      upcomingEventSnapshot['date'].toDate();
+                                  String month =
+                                      DateFormat('MMM').format(dateTime);
+
+                                  return TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return const UpcomingEvents();
+                                        }));
+                                      },
+                                      child: Text(
+                                        'You have an appointment at $time \non $day, $month ${dateTime.day}. ',
+                                        style: const TextStyle(
+                                            color: kDefaultIconLightColor,
+                                            fontSize: 16),
+                                      ));
+                                }
+                              }
+                            }),
+
+                        //
                       ],
                     )),
                 Padding(

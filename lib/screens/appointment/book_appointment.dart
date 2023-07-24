@@ -342,40 +342,6 @@ class _BookAppointmentState extends State<BookAppointment> {
                     }
                   }
                 },
-                // onPressed: () async {
-                //   if (_timeSelected && _dateSelected) {
-                //     final getDate = _currentDay;
-                //     final weekDay = DateFormat('EEEE').format(
-                //       DateTime(
-                //         2023,
-                //         1,
-                //         _currentDay.weekday,
-                //       ),
-                //     );
-                //     try {
-                //       await FirebaseFirestore.instance
-                //           .collection('Experts')
-                //           .doc(widget.expert.id)
-                //           .collection('bookings')
-                //           .add({
-                //         'date': getDate,
-                //         'day': weekDay,
-                //         'time': selectedTime,
-                //         'user_id': currentUser!.uid,
-                //         'user_name': currentUser.name,
-                //         'timestamp': DateTime.now().millisecondsSinceEpoch,
-                //       });
-
-                //       Navigator.of(context).push(
-                //         MaterialPageRoute(
-                //           builder: (context) => const SuccessBooking(),
-                //         ),
-                //       );
-                //     } catch (e) {
-                //       print('Error adding booking: $e');
-                //     }
-                //   }
-                // },
               ),
             ),
           ],
@@ -465,6 +431,20 @@ class _BookAppointmentState extends State<BookAppointment> {
           'user_id': currentUser!.uid,
           'user_name': currentUser.name,
           'timestamp': DateTime.now().millisecondsSinceEpoch,
+        });
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentuserId)
+            .collection('myBookings')
+            .add({
+          'payment_id': responseId,
+          'date': getDate,
+          'day': weekDay,
+          'time': selectedTime,
+          'expert_id': widget.expert.id,
+          'expert_name': widget.expert.name,
+          'expert_dp': widget.expert.imageUrl,
+          'category': widget.expert.category,
         });
       } catch (e) {
         print('Error adding booking: $e');

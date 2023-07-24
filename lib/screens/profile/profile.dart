@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 66, 34, 5),
+        backgroundColor: kBackgroundColor,
         elevation: 0.0,
         title: Text(
           '${userInfo?.email}'.split('@')[0],

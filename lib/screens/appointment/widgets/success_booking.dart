@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:gro_better/screens/community/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:lottie/lottie.dart';
@@ -23,82 +22,87 @@ class SuccessBooking extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.amber[50],
+        body: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(right: 350),
-              child: IconButton(
+            Align(
+              alignment: Alignment.topLeft,
+              child: TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
                     return const HomeScreen();
                   }));
                 },
-                icon: const Icon(Icons.arrow_back),
-              ),
-            ),
-            kHeight10,
-            Center(
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(image),
-                radius: 70,
-              ),
-            ),
-            kHeight10,
-            Text(
-              name,
-              style: GoogleFonts.outfit(),
-            ),
-            Text(
-              category,
-              style: GoogleFonts.outfit(),
-            ),
-            kHeight10,
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                ),
-                height: 130,
-                width: double.infinity,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Timing : $time',
-                        style: GoogleFonts.outfit(fontSize: 15),
-                      ),
-                      kHeight10,
-                      Text(
-                        'Appointment Date: $date  ',
-                        style: GoogleFonts.outfit(fontSize: 15),
-                      ),
-                      kHeight10,
-                      Text(
-                        'Payment Id:  $paymentId',
-                        style: GoogleFonts.outfit(fontSize: 15),
-                      ),
-                    ],
-                  ),
+                style: ButtonStyle(
+                    elevation: MaterialStateProperty.all(0),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.amber[50])),
+                child: const Text(
+                  'Done',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            kHeight20,
-            Text(
+            kHeight30,
+            const Text(
               'Payment Successfully Completed!',
-              style:
-                  GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             kHeight10,
             Lottie.network(
-                'https://assets3.lottiefiles.com/packages/lf20_xwmj0hsk.json',
-                height: 200)
+                'https://lottie.host/1c17976b-08b8-4c6b-bcf9-a8bda2d91207/HoF11yqmPP.json',
+                height: 150),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width * 0.76,
+              padding: const EdgeInsets.all(15),
+              margin: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                width: 2,
+                color: Colors.black,
+              )),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Center(
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(image),
+                      radius: 50,
+                    ),
+                  ),
+                  Text(
+                    name.toUpperCase(),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    category,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  kHeight10,
+                  Text(
+                    'Reservation Time : $time',
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                  kHeight10,
+                  Text(
+                    'Reservation Date: $date  ',
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                  kHeight10,
+                  Text(
+                    'Payment Id:  $paymentId',
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

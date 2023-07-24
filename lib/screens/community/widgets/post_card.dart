@@ -27,7 +27,7 @@ class PostCard extends StatelessWidget {
                     return Text(
                       provider.isAnonymous ? 'Anonymous' : post.username,
                       style: const TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
                     );
@@ -39,7 +39,7 @@ class PostCard extends StatelessWidget {
                 const SizedBox(height: 12.0),
                 Text(
                   post.content,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.black),
                 ),
                 const SizedBox(height: 16.0),
                 Row(

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 var currentuserId = FirebaseAuth.instance.currentUser!.uid;
-const kPrimaryColor = Color.fromARGB(255, 66, 34, 5);
+const kPrimaryColor = Color.fromARGB(255, 21, 27, 21);
 
 const kTextColor = Color(0xFF3C4046);
 const kTextColor2 = Colors.white;
 const kButtonColor = Color.fromARGB(255, 234, 140, 140);
-const kBackgroundColor = Color.fromARGB(255, 213, 103, 0);
-const kBackgroundColor2 = Color.fromARGB(255, 191, 139, 91);
+const kBackgroundColor = Color.fromARGB(255, 50, 56, 50);
+const kBackgroundColor2 = Color.fromARGB(255, 177, 161, 146);
 const kWidth10 = SizedBox(
   width: 10,
 );
@@ -27,8 +27,8 @@ const gradientColor = LinearGradient(
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
     colors: [
-      Color.fromARGB(255, 191, 139, 91),
-      Color.fromARGB(255, 66, 34, 5)
+      Color.fromARGB(255, 205, 172, 142),
+      Color.fromARGB(255, 177, 164, 150)
     ]);
 TextStyle appBarTitleText = const TextStyle(
     color: kTextColor2, fontWeight: FontWeight.bold, fontSize: 42);
