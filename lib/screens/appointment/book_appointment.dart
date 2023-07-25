@@ -166,8 +166,12 @@ class _BookAppointmentState extends State<BookAppointment> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kBackgroundColor,
-        title: const Text('Book Appointment'),
+        backgroundColor: kPrimaryColor,
+        title: const Text(
+          'Book Appointment',
+          style: TextStyle(
+              color: Colors.white, fontSize: 23, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
@@ -314,7 +318,7 @@ class _BookAppointmentState extends State<BookAppointment> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: kButtonColor,
+                  backgroundColor: kPrimaryColor,
                 ),
                 child: const Text('Book Now'),
                 onPressed: () async {
@@ -362,7 +366,7 @@ class _BookAppointmentState extends State<BookAppointment> {
         rowHeight: 30,
         calendarStyle: const CalendarStyle(
           todayDecoration: BoxDecoration(
-            color: kButtonColor,
+            color: kPrimaryColor,
             shape: BoxShape.circle,
           ),
         ),

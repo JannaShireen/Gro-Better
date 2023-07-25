@@ -13,18 +13,23 @@ class DoctorsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: kBackgroundColor,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: kBackgroundColor,
-          title: const Text('Experts'),
+          title: const Text(
+            'Experts',
+            style: headingTextStyle,
+          ),
           centerTitle: true,
           leading: IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const DoctorSearchPage()));
-              },
-              icon: const Icon(Icons.search)),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const DoctorSearchPage()));
+            },
+            icon: const Icon(Icons.search),
+            color: Colors.black,
+          ),
         ),
         body: const ListofDoctors());
   }
@@ -64,7 +69,7 @@ class ListofDoctors extends StatelessWidget {
                       );
                     },
                     child: Card(
-                      color: kBackgroundColor,
+                      color: kPrimaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0)),
                       elevation: 5,
@@ -83,7 +88,10 @@ class ListofDoctors extends StatelessWidget {
                             kHeight10,
                             Text(
                               expert.name,
-                              style: headingTextStyle,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 23),
                             ),
                             kHeight10,
                             Text(

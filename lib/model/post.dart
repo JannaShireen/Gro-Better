@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Post {
+  final String authorId;
   final String username;
   final String content;
   final bool isAnonymous;
@@ -12,6 +13,7 @@ class Post {
   bool isSaved;
 
   Post({
+    required this.authorId,
     required this.username,
     required this.content,
     required this.isAnonymous,
@@ -23,6 +25,7 @@ class Post {
 
   Map<String, dynamic> toJson() {
     return {
+      'authorId': authorId,
       'username': username,
       'content': content,
       'isAnonymous': isAnonymous,
@@ -36,6 +39,7 @@ class Post {
   static Post fromDocumentSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
     return Post(
+      authorId: data['authorId'],
       username: data['username'] ?? " ",
       content: data['content'] ?? '',
       timeStamp: data['timestamp'], // Convert to int

@@ -1,21 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 var currentuserId = FirebaseAuth.instance.currentUser!.uid;
-const kPrimaryColor = Color.fromARGB(255, 21, 27, 21);
+const kPrimaryColor = Color.fromARGB(255, 5, 118, 88);
 
 const kTextColor = Color(0xFF3C4046);
 const kTextColor2 = Colors.white;
-const kButtonColor = Color.fromARGB(255, 234, 140, 140);
-const kBackgroundColor = Color.fromARGB(255, 50, 56, 50);
-const kBackgroundColor2 = Color.fromARGB(255, 177, 161, 146);
+const kButtonColor = Color.fromARGB(255, 143, 184, 184);
+const kBackgroundColor = Color.fromARGB(255, 193, 225, 193);
+const kBackgroundColor2 = Color.fromARGB(255, 254, 240, 226);
 const kWidth10 = SizedBox(
   width: 10,
 );
 const TextStyle textStyle2 = TextStyle(
   fontWeight: FontWeight.w300,
-  color: kTextColor2,
+  color: Colors.black,
   fontSize: 16,
 );
 const kHeight10 = SizedBox(height: 10);
@@ -32,8 +31,8 @@ const gradientColor = LinearGradient(
     ]);
 TextStyle appBarTitleText = const TextStyle(
     color: kTextColor2, fontWeight: FontWeight.bold, fontSize: 42);
-final TextStyle headingTextStyle = GoogleFonts.lato(
-    fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
+const TextStyle headingTextStyle =
+    TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 21);
 //GoogleFonts.lato(
 //fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20);
 const textInputDecoration = InputDecoration(

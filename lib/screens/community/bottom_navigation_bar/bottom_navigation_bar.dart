@@ -41,23 +41,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           bottomNavigationBar: BottomNavigationBar(
             enableFeedback: true,
-            backgroundColor: const Color.fromARGB(255, 191, 139, 91),
+            backgroundColor: kPrimaryColor,
             selectedItemColor: kDefaultIconDarkColor,
             type: BottomNavigationBarType.fixed,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home,
-                  color: kPrimaryColor,
+                  color: kBackgroundColor,
                 ),
                 label: 'Community',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.medical_services, color: kPrimaryColor),
+                icon: Icon(Icons.medical_services, color: kBackgroundColor),
                 label: 'Experts',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person, color: kPrimaryColor),
+                icon: Icon(Icons.person, color: kBackgroundColor),
                 label: 'Profile',
               ),
             ],

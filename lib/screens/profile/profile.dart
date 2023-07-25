@@ -4,7 +4,6 @@ import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/screens/widgets/logout.dart';
 import 'package:gro_better/screens/widgets/my_records.dart';
 import 'package:gro_better/screens/widgets/my_thoughts.dart';
-import 'package:gro_better/screens/widgets/profile_popup_menu.dart';
 import 'package:gro_better/screens/widgets/top_section.dart';
 import 'package:gro_better/services/auth.dart';
 import 'package:gro_better/shared/constants.dart';
@@ -20,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kBackgroundColor,
+        backgroundColor: kPrimaryColor,
         elevation: 0.0,
         title: Text(
           '${userInfo?.email}'.split('@')[0],
@@ -33,41 +32,41 @@ class ProfileScreen extends StatelessWidget {
               ),
         ),
         actions: <Widget>[
-          const ProfilePopupMenu(),
           LogoutButton(auth: auth),
+          //const ProfilePopupMenu(),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(gradient: gradientColor),
-          child: const Column(
-            children: [
-              TopSection(),
-              DividerTeal,
-              DefaultTabController(
-                length: 2,
-                child: Column(
-                  children: [
-                    TabBar(
-                      tabs: [
-                        Tab(text: 'My Thoughts'),
-                        Tab(text: 'My Records'),
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            TopSection(),
+            DividerTeal,
+            DefaultTabController(
+              length: 2,
+              child: Column(
+                children: [
+                  TabBar(
+                    labelColor: Colors.black,
+                    tabs: [
+                      Tab(
+                        text: 'My Thoughts',
+                      ),
+                      Tab(text: 'My Records'),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 500, // Adjust the height as needed
+                    child: TabBarView(
+                      children: [
+                        ThoughtsTab(),
+                        MyRecordsTab(),
                       ],
                     ),
-                    SizedBox(
-                      height: 500, // Adjust the height as needed
-                      child: TabBarView(
-                        children: [
-                          ThoughtsTab(),
-                          MyRecordsTab(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

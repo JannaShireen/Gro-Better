@@ -20,7 +20,16 @@ class RegisterUser extends StatelessWidget {
             ? Loading()
             : Scaffold(
                 appBar: AppBar(
-                  title: const Text('Sign up on Gro Better'),
+                  title: TextButton(
+                    onPressed: () {
+                      toggleView();
+                    },
+                    child: const Text(
+                      'Already a member? ',
+                      style: kTextStyle,
+                    ),
+                  ),
+                  //title: const Text('Sign up on Gro Better'),
                   backgroundColor: kPrimaryColor,
                 ),
                 body: Container(
@@ -32,17 +41,10 @@ class RegisterUser extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             const Text(
-                              'Already a member? ',
-                              style: TextStyle(
-                                color: kTextColor2,
-                              ),
+                              'Sign up on Gro Better',
+                              style: headingTextStyle,
                             ),
-                            TextButton(
-                              onPressed: () {
-                                toggleView();
-                              },
-                              child: const Text('Log In'),
-                            ),
+                            kHeight30,
                             TextFormField(
                               onChanged: (value) => state.name = value,
                               decoration: textInputDecoration.copyWith(
@@ -93,30 +95,18 @@ class RegisterUser extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     kWidth10,
-                                    const Text(
-                                      'Date of Birth',
-                                      style: TextStyle(
-                                        color: kTextColor2,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),
-                                    ),
+                                    const Text('Date of Birth',
+                                        style: textStyle2),
                                     kWidth10,
-                                    if (state.date == null)
-                                      const Text('')
-                                    else
-                                      Text(
-                                        parseDate(state.date),
-                                        style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                          color: kTextColor2,
-                                        ),
-                                      ),
+                                    // if (state.date == null)
+                                    //   const Text('')
+                                    // else
+                                    //   Text(parseDate(state.date),
+                                    //       style: textStyle2),
                                     kWidth10,
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: kButtonColor,
+                                        backgroundColor: Colors.green[200],
                                       ),
                                       onPressed: () async {
                                         await showCupertinoModalPopup<void>(
@@ -145,7 +135,10 @@ class RegisterUser extends StatelessWidget {
                                           },
                                         );
                                       },
-                                      child: const Text('Choose Date'),
+                                      child: const Text(
+                                        'Choose Date',
+                                        style: TextStyle(color: kPrimaryColor),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -159,7 +152,7 @@ class RegisterUser extends StatelessWidget {
                               width: 150,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: kBackgroundColor2,
+                                  backgroundColor: kPrimaryColor,
                                 ),
                                 onPressed: () async {
                                   if (state.formKey.currentState!.validate()) {

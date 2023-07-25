@@ -13,54 +13,49 @@ class TopSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
+    String firstLetter = userInfo!.email.substring(0, 1);
     return Container(
       padding: const EdgeInsets.all(20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const CircleAvatar(
-            radius: 60,
-            backgroundImage: AssetImage('assets/images/add-user-dp.png'),
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: Colors.black,
+            child: Text(
+              firstLetter,
+              style: const TextStyle(color: Colors.white, fontSize: 34),
+            ),
           ),
-          Column(
-            children: [
-              Text(
-                ' ${userInfo?.name}',
-                //'${document['name']}',
-                style: const TextStyle(
-                  fontSize: 27,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              kHeight10,
-              Text(
-                'Born on ${'${userInfo?.dob}'.split(" ")[0]}',
-                //  'DOB: ${'${document['DOB']}.'.split(" ")[0]}',
-                style: textStyle2,
-              ),
-              kHeight10,
-
-              Text(
-                'Bio: ${userInfo?.bioNotes ?? ' '}',
-                style: textStyle2,
-              ),
-              kHeight20,
-
-              // Text(' Nationaity: ${userInfo?.nationality.toString()} '),
-
-              // Text('DOB:  ${document['DOB']}', style: textStyle2),
-              // const SizedBox(height: 10),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(kButtonColor)),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => const EditProfile())));
-                },
-                child: const Text('Edit Profile'),
-              ),
-            ],
+          Text(
+            ' ${userInfo.name}',
+            //'${document['name']}',
+            style: const TextStyle(
+              fontSize: 27,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          kHeight10,
+          Text(
+            'DOB:  ${'${userInfo.dob}'.split(" ")[0]}',
+            //  'DOB: ${'${document['DOB']}.'.split(" ")[0]}',
+            style: textStyle2,
+          ),
+          kHeight10,
+          Text(
+            'Bio ${userInfo.bioNotes ?? ''}',
+            style: textStyle2,
+          ),
+          kHeight10,
+          ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(kPrimaryColor)),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => const EditProfile())));
+            },
+            child: const Text('Edit Bio'),
           ),
         ],
       ),

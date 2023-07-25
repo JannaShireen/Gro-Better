@@ -151,8 +151,7 @@ class _SignInState extends State<SignIn> {
                                                 },
                                                 child: const Text(
                                                   'Forgot Password?',
-                                                  style: TextStyle(
-                                                      color: kTextColor2),
+                                                  style: textStyle2,
                                                 ),
                                               ),
                                             ],
@@ -167,7 +166,7 @@ class _SignInState extends State<SignIn> {
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                   backgroundColor:
-                                                      kBackgroundColor2),
+                                                      kPrimaryColor),
                                               onPressed: () async {
                                                 if (_formKey.currentState!
                                                     .validate()) {
@@ -225,42 +224,21 @@ class _SignInState extends State<SignIn> {
                                   const EdgeInsets.symmetric(horizontal: 20.0),
                               child: Row(
                                 children: [
-                                  Expanded(
-                                    child: Divider(
-                                      thickness: 0.5,
-                                      color: Colors.grey[400],
-                                    ),
+                                  const Text(
+                                    "Don't have an account yet? ",
+                                    style: textStyle2,
                                   ),
-                                  const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10.0),
-                                    child: Text(
-                                      "Don't have an account yet? ",
-                                      style: TextStyle(color: kTextColor2),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Divider(
-                                      thickness: 0.5,
-                                      color: Colors.grey[400],
-                                    ),
-                                  ),
+                                  TextButton.icon(
+                                      onPressed: () {
+                                        widget.toggleView();
+                                      },
+                                      icon: const Icon(Icons.app_registration),
+                                      label: const Text('Register here')),
                                 ],
                               ),
                             ),
 
                             //  kHeight20,
-
-                            SizedBox(
-                              width: 120,
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: kBackgroundColor2),
-                                  onPressed: () {
-                                    widget.toggleView();
-                                  },
-                                  child: const Text('Register here')),
-                            ),
                           ],
                         ),
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gro_better/model/post.dart';
 import 'package:gro_better/provider/post_options_provider.dart';
+import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
 
 class PostCard extends StatelessWidget {
@@ -13,6 +14,8 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String firstLetter = post.username.substring(0, 1);
+
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Row(
@@ -24,24 +27,37 @@ class PostCard extends StatelessWidget {
               children: [
                 Consumer<PostOptionsProvider>(
                   builder: (context, provider, child) {
-                    return Text(
-                      provider.isAnonymous ? 'Anonymous' : post.username,
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                    return Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.black,
+                          child: Text(
+                            firstLetter,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 24),
+                          ),
+                        ),
+                        kWidth10,
+                        Text(
+                          provider.isAnonymous ? 'Anonymous' : post.username,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ],
                     );
                   },
                 ),
                 // Text(post.username,
                 //     style: GoogleFonts.roboto(
                 //         fontSize: 22, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 12.0),
+                kHeight10,
                 Text(
                   post.content,
                   style: const TextStyle(color: Colors.black),
                 ),
-                const SizedBox(height: 16.0),
+                kHeight10,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -83,6 +99,7 @@ class PostCard extends StatelessWidget {
                     ),
                   ],
                 ),
+                const Divider(),
               ],
             ),
           )

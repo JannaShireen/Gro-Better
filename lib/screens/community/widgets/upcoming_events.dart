@@ -11,10 +11,13 @@ class UpcomingEvents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kDefaultIconLightColor,
+      backgroundColor: const Color.fromARGB(255, 233, 231, 231),
       appBar: AppBar(
-        backgroundColor: kBackgroundColor,
-        title: const Text('Upcoming Events'),
+        backgroundColor: kPrimaryColor,
+        title: const Text(
+          'Upcoming Events',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot?>(
@@ -31,7 +34,10 @@ class UpcomingEvents extends StatelessWidget {
             if (upcomingEventsSnapshot == null ||
                 upcomingEventsSnapshot.size == 0) {
               return const Center(
-                child: Text('No upcoming events found.'),
+                child: Text(
+                  'No upcoming events found.',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
               );
             } else {
               return ListView.builder(
@@ -58,16 +64,18 @@ class UpcomingEvents extends StatelessWidget {
                         ),
                         kHeight10,
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            const SizedBox(
-                              width: 5,
-                            ),
                             const Icon(Icons.lock_clock),
                             Text(
                               '   $monthName  ${dateTime.day.toString()} -  ${event['time']}',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const Icon(
+                              Icons.video_call,
+                              color: Colors.green,
+                              size: 33,
                             ),
                           ],
                         ),

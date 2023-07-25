@@ -31,7 +31,7 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       // initialValue: '',
-      style: const TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.black),
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,

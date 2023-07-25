@@ -33,7 +33,7 @@ class DoctorProfile extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Know Your Expert'),
           automaticallyImplyLeading: true,
-          backgroundColor: kBackgroundColor,
+          backgroundColor: kPrimaryColor,
         ),
         body: Stack(children: [
           SingleChildScrollView(
@@ -75,26 +75,26 @@ class DoctorProfile extends StatelessWidget {
                     kHeight10,
                     Text(
                       expert.category,
-                      style: kTextStyle,
+                      style: textStyle2,
                     ),
                     kHeight10,
                     expert.fee != null
                         ? Text(
                             'Fee : ${expert.fee} INR / Hour',
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 17),
+                                color: Colors.black, fontSize: 17),
                           )
                         : const Text(
                             'Fee not added yet',
-                            style: kTextStyle,
+                            style: textStyle2,
                           ),
                     kHeight10,
                     Text(
                       ' ${expert.sessionCount}  Sessions',
-                      style: const TextStyle(color: Colors.white, fontSize: 17),
+                      style: const TextStyle(color: Colors.black, fontSize: 17),
                     ),
                     kHeight20,
-                    Text(
+                    const Text(
                       'Tentative Availability (in IST)',
                       style: headingTextStyle,
                     ),
@@ -102,7 +102,7 @@ class DoctorProfile extends StatelessWidget {
                     Text(
                       'Mon - Sat    ${DateFormat.Hm().format(expert.fromTime)} - ${DateFormat.Hm().format(expert.toTime)}',
                       // 'Mon - Sat     05.00 PM - 09.00 PM',
-                      style: kTextStyle,
+                      style: textStyle2,
                     ),
 
                     kHeight10,
@@ -115,7 +115,7 @@ class DoctorProfile extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
                     //About
-                    Text(
+                    const Text(
                       'About',
                       style: headingTextStyle,
                     ),
@@ -124,32 +124,32 @@ class DoctorProfile extends StatelessWidget {
                         ? Text(
                             expert.about,
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 17),
+                                color: Colors.black, fontSize: 17),
                           )
                         : const Text('Not added'),
 
                     //What can you ask me?
                     kHeight20,
-                    Text(
+                    const Text(
                       'What can you ask me:',
                       style: headingTextStyle,
                     ),
                     kHeight20,
                     Text(
                       '♦️ ${expert.question1}',
-                      style: const TextStyle(color: Colors.white, fontSize: 17),
+                      style: const TextStyle(color: Colors.black, fontSize: 17),
                     ),
                     kHeight10,
                     Text('♦️ ${expert.question2}',
                         style:
-                            const TextStyle(color: Colors.white, fontSize: 17)),
+                            const TextStyle(color: Colors.black, fontSize: 17)),
                     kHeight10,
                     Text('♦️ ${expert.question3}',
                         style:
-                            const TextStyle(color: Colors.white, fontSize: 17)),
+                            const TextStyle(color: Colors.black, fontSize: 17)),
                     kHeight20,
                     // User Reviews
-                    Text(
+                    const Text(
                       'User Reviews',
                       style: headingTextStyle,
                     ),
@@ -167,7 +167,7 @@ class DoctorProfile extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
+                            const Text(
                               'Rating',
                               style: headingTextStyle,
                             ),
@@ -203,7 +203,7 @@ class DoctorProfile extends StatelessWidget {
                                           '${userRatings[index]}',
                                           style: const TextStyle(
                                               fontSize: 16,
-                                              color: Colors.white),
+                                              color: Colors.black),
                                         ),
                                       ],
                                     ),
@@ -340,7 +340,7 @@ class DoctorProfile extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'User Feedback',
                       style: headingTextStyle,
                     ),
@@ -371,13 +371,13 @@ class DoctorProfile extends StatelessWidget {
                                       style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white),
+                                          color: Colors.black),
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
                                       feedback['feedback'],
                                       style: const TextStyle(
-                                          fontSize: 16, color: Colors.white),
+                                          fontSize: 16, color: Colors.black),
                                     ),
                                     const Divider(),
                                   ],
@@ -398,7 +398,7 @@ class DoctorProfile extends StatelessWidget {
             left: 200,
             child: ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(kButtonColor)),
+                  backgroundColor: MaterialStateProperty.all(kPrimaryColor)),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => BookAppointment(
@@ -410,7 +410,7 @@ class DoctorProfile extends StatelessWidget {
                 'Book Appoinment',
                 style: TextStyle(
                     fontSize: 17,
-                    color: kBackgroundColor,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
             ),

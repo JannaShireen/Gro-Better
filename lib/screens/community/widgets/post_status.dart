@@ -17,23 +17,29 @@ class CreatePostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
     final String currentUsername = userInfo!.email.split('@')[0];
+    String firstLetter = currentUsername.substring(0, 1);
     return ChangeNotifierProvider(
       create: (_) => PostOptionsProvider(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Create Post'),
           automaticallyImplyLeading: true,
-          backgroundColor: kBackgroundColor,
+          backgroundColor: kPrimaryColor,
         ),
         body: Container(
-          decoration: const BoxDecoration(gradient: gradientColor),
           padding: const EdgeInsets.all(30.0),
           child: ListView(
             // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const CircleAvatar(),
+                  CircleAvatar(
+                    backgroundColor: Colors.black,
+                    child: Text(
+                      firstLetter,
+                      style: const TextStyle(color: Colors.white, fontSize: 24),
+                    ),
+                  ),
                   const SizedBox(width: 10),
                   Consumer<PostOptionsProvider>(
                     builder: (context, provider, child) {
@@ -55,37 +61,41 @@ class CreatePostWidget extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintStyle: const TextStyle(color: Colors.grey),
+                  hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 113, 111, 111)),
                   hintText: 'What\'s on your mind?',
                 ),
               ),
               kHeight20,
-              ElevatedButton.icon(
-                onPressed: () {
-                  try {
-                    submitPost(context, currentUsername);
-                    // Show a SnackBar with the success message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Status updated successfully'),
-                      ),
-                    );
-                    Navigator.of(context).pop();
-                  } catch (e) {
-                    print('Error posting status: $e');
-                    // Show a SnackBar with the error message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Error updating status'),
-                      ),
-                    );
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: kButtonColor,
+              SizedBox(
+                width: 70,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    try {
+                      submitPost(context, currentUsername);
+                      // Show a SnackBar with the success message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Status updated successfully'),
+                        ),
+                      );
+                      Navigator.of(context).pop();
+                    } catch (e) {
+                      print('Error posting status: $e');
+                      // Show a SnackBar with the error message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Error updating status'),
+                        ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kPrimaryColor,
+                  ),
+                  icon: const Icon(Icons.post_add_rounded),
+                  label: const Text('Post'),
                 ),
-                icon: const Icon(Icons.post_add_rounded),
-                label: const Text('Post'),
               ),
               kHeight20,
               Row(
@@ -122,6 +132,7 @@ class CreatePostWidget extends StatelessWidget {
     var postContent = _textEditingController.text;
     var provider = Provider.of<PostOptionsProvider>(context, listen: false);
     Post newPost = Post(
+        authorId: currentuserId,
         username: userName,
         content: postContent,
         isAnonymous: provider.isAnonymous,
