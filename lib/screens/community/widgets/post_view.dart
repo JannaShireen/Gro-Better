@@ -10,12 +10,16 @@ class PostViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('posts')
+            .orderBy('timestamp', descending: true)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final List<Post> posts = snapshot.data!.docs
                 .map((doc) => Post.fromDocumentSnapshot(doc))
                 .toList();
+            // final documents = snapshot.data!.docs;
 
             return Container(
               padding: const EdgeInsets.all(10.0), // Add desired spacing
@@ -24,8 +28,10 @@ class PostViewWidget extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: posts.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final post = posts[index];
-                    return PostCard(post: post);
+                    // final post = documents[index];
+                    return PostCard(
+                      post: posts[index],
+                    );
                   }),
             );
           } else if (snapshot.hasError) {

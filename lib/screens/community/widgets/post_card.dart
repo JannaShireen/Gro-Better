@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gro_better/model/post.dart';
 import 'package:gro_better/provider/post_options_provider.dart';
+import 'package:gro_better/services/database/post_services.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({
     super.key,
+    bool isLiked = false,
     required this.post,
   });
 
@@ -31,15 +33,21 @@ class PostCard extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           backgroundColor: Colors.black,
-                          child: Text(
-                            firstLetter,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 24),
-                          ),
+                          child: post.isAnonymous
+                              ? const Text(
+                                  '👀',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                )
+                              : Text(
+                                  firstLetter,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 24),
+                                ),
                         ),
                         kWidth10,
                         Text(
-                          provider.isAnonymous ? 'Anonymous' : post.username,
+                          post.isAnonymous ? 'Anonymous User' : post.username,
                           style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -64,21 +72,31 @@ class PostCard extends StatelessWidget {
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(post.isLiked
-                              ? Icons.favorite
-                              : Icons.favorite_border),
+                          icon: post.likes.contains(currentuserId)
+                              ? const Icon(Icons.favorite)
+                              : const Icon(Icons.favorite_border),
                           onPressed: () {
-                            // setState(() {
-                            //   post.isLiked = !post.isLiked;
-                            //   if (post.isLiked) {
-                            //     post.likeCount++;
-                            //   } else {
-                            //     post.likeCount--;
-                            //   }
-                            // });
+                            PostServices(uid: currentuserId).likePost(
+                                post.postId, currentuserId, post.likes);
                           },
                         ),
-                        Text(post.likeCount.toString()),
+                        //   icon: Icon(post.isLiked
+                        //       ? Icons.favorite
+                        //       : Icons.favorite_border),
+                        //   onPressed: () {
+                        //     // setState(() {
+                        //     //   post.isLiked = !post.isLiked;
+                        //     //   if (post.isLiked) {
+                        //     //     post.likeCount++;
+                        //     //   } else {
+                        //     //     post.likeCount--;
+                        //     //   }
+                        //     // });
+                        //   },
+                        // ),
+                        Text(post.likes != null
+                            ? post.likes.length.toString()
+                            : '0'),
                       ],
                     ),
                     IconButton(

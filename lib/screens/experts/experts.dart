@@ -50,7 +50,7 @@ class ListofDoctors extends StatelessWidget {
                 .map((doc) => ExpertInfo.fromSnap(doc))
                 .toList();
             return Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(36.0),
               child: GridView.builder(
                 shrinkWrap: true,
                 itemCount: experts.length,
@@ -58,7 +58,7 @@ class ListofDoctors extends StatelessWidget {
                     crossAxisCount: 1, childAspectRatio: 1),
                 itemBuilder: (context, index) {
                   final expert = experts[index];
-                  return GestureDetector(
+                  return InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -69,7 +69,7 @@ class ListofDoctors extends StatelessWidget {
                       );
                     },
                     child: Card(
-                      color: kPrimaryColor,
+                      color: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0)),
                       elevation: 5,
@@ -89,7 +89,7 @@ class ListofDoctors extends StatelessWidget {
                             Text(
                               expert.name,
                               style: const TextStyle(
-                                  color: Colors.white,
+                                  color: Color.fromARGB(255, 7, 0, 0),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 23),
                             ),
@@ -98,7 +98,7 @@ class ListofDoctors extends StatelessWidget {
                               expert.category,
                               style: GoogleFonts.lato(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: const Color.fromARGB(255, 18, 11, 11)),
                             ),
                           ]),
                     ),
