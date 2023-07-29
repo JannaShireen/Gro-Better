@@ -93,6 +93,14 @@ class CreatePostWidget extends StatelessWidget {
                   ),
                 ],
               ),
+              kHeight10,
+              const Center(
+                child: Text(
+                  'Note: Your doctor can view your anonymous posts.',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+              kHeight10,
               SizedBox(
                 width: 70,
                 child: ElevatedButton.icon(
