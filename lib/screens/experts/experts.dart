@@ -103,55 +103,12 @@ class ListofDoctors extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.center,
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       SizedBox(
-                      //           width: MediaQuery.of(context).size.width * 0.35,
-                      //           height:
-                      //               MediaQuery.of(context).size.height * 0.15,
-                      //           child: Image.network(
-                      //             expert.imageUrl,
-                      //             fit: BoxFit.cover,
-                      //           )),
-                      //       kHeight10,
-                      //       Text(
-                      //         expert.name,
-                      //         style: const TextStyle(
-                      //             color: Color.fromARGB(255, 7, 0, 0),
-                      //             fontWeight: FontWeight.bold,
-                      //             fontSize: 23),
-                      //       ),
-                      //       kHeight10,
-                      //       Text(
-                      //         expert.category,
-                      //         style: GoogleFonts.lato(
-                      //             fontWeight: FontWeight.bold,
-                      //             color: const Color.fromARGB(255, 18, 11, 11)),
-                      //       ),
-                      //     ]),
                     ),
                   ),
                 );
               },
             );
 
-            // return Container(
-            //   padding: const EdgeInsets.all(10.0), // Add desired spacing
-
-            //   child: ListView.builder(
-            //       shrinkWrap: true,
-            //       physics: const NeverScrollableScrollPhysics(),
-            //       itemCount: experts.length,
-            //       itemBuilder: (BuildContext context, int index) {
-            //         final expert = experts[index];
-            //         return ListTile(
-            //           leading: const CircleAvatar(backgroundColor: Colors.blue),
-            //           title: Text(expert.name),
-            //           subtitle: Text(expert.category),
-            //         );
-            //       }),
             // );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');

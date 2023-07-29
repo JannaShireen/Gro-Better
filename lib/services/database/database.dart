@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:gro_better/model/post.dart';
 import 'package:gro_better/model/user_info.dart';
 
 class DatabaseService {
@@ -19,7 +18,7 @@ class DatabaseService {
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection('users');
 
-  final CollectionReference _postsCollection =
+  final CollectionReference postsCollection =
       FirebaseFirestore.instance.collection('posts');
 
   Future updateUserData(UserDetails userDetails) async {
@@ -31,6 +30,21 @@ class DatabaseService {
       'BioNotes': bioNotes,
       'Nationality': nationality,
     });
+  }
+
+  Future deleteUserRecords() async {
+    try {
+      await userCollection.doc(uid).delete();
+      // Query to get all posts with the provided authorId
+      QuerySnapshot querySnapshot =
+          await postsCollection.where('authorId', isEqualTo: uid).get();
+      // Loop through the documents and delete them one by one
+      querySnapshot.docs.forEach((doc) async {
+        await doc.reference.delete();
+      });
+    } catch (e) {
+      print('Error deleting user records $e');
+    }
   }
 
   Future<UserDetails> getUserDetails() async {

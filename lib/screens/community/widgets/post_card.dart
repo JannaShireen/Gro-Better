@@ -90,20 +90,6 @@ class PostCard extends StatelessWidget {
                                 post.postId, currentuserId, post.likes);
                           },
                         ),
-                        //   icon: Icon(post.isLiked
-                        //       ? Icons.favorite
-                        //       : Icons.favorite_border),
-                        //   onPressed: () {
-                        //     // setState(() {
-                        //     //   post.isLiked = !post.isLiked;
-                        //     //   if (post.isLiked) {
-                        //     //     post.likeCount++;
-                        //     //   } else {
-                        //     //     post.likeCount--;
-                        //     //   }
-                        //     // });
-                        //   },
-                        // ),
                         Text(post.likes != null
                             ? post.likes.length.toString()
                             : '0'),
