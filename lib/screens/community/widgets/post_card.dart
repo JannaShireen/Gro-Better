@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gro_better/model/post.dart';
 import 'package:gro_better/provider/post_options_provider.dart';
@@ -27,6 +28,15 @@ class PostCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if (post.authorId == currentuserId)
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: IconButton(
+                          onPressed: () {
+                            _showDeleteConfirmationDialog(context, post.postId);
+                          },
+                          icon: const Icon(Icons.delete))),
+
                 Consumer<PostOptionsProvider>(
                   builder: (context, provider, child) {
                     return Row(
@@ -124,5 +134,50 @@ class PostCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showDeleteConfirmationDialog(BuildContext context, String postId) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: const Color.fromARGB(255, 221, 215, 215),
+            title: const Text('Delete Post?'),
+            content: const Text('Are you sure you want to delete this post?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    DocumentReference postRef = FirebaseFirestore.instance
+                        .collection('posts')
+                        .doc(postId);
+                    await postRef.delete();
+                    const SnackBar(
+                        content: Text('Post deleted successfullly.'));
+
+                    Navigator.of(context).pop(); // Close the dialog
+                  } catch (e) {
+                    debugPrint('Error deleting post $e');
+                    const SnackBar(
+                      content: Text('Error deleting post'),
+                    );
+                  }
+                },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red)),
+                child: const Text('Delete'),
+              ),
+            ],
+          );
+        });
   }
 }
