@@ -7,9 +7,7 @@ class Post {
   final String content;
   final bool isAnonymous;
   final List likes;
-
   final Timestamp timeStamp; // Change the type to int
-
   int likeCount;
   bool isSaved;
 

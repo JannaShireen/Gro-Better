@@ -24,8 +24,8 @@ class DoctorsList extends StatelessWidget {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const DoctorSearchPage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => DoctorSearchPage()));
             },
             icon: const Icon(Icons.search),
             color: Colors.black,
@@ -49,62 +49,92 @@ class ListofDoctors extends StatelessWidget {
             final List<ExpertInfo> experts = snapshot.data!.docs
                 .map((doc) => ExpertInfo.fromSnap(doc))
                 .toList();
-            return Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: GridView.builder(
-                shrinkWrap: true,
-                itemCount: experts.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1, childAspectRatio: 1),
-                itemBuilder: (context, index) {
-                  final expert = experts[index];
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DoctorProfile(
-                                  expert: expert,
-                                )),
-                      );
-                    },
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: experts.length,
+              itemBuilder: (context, index) {
+                final expert = experts[index];
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DoctorProfile(
+                                expert: expert,
+                              )),
+                    );
+                  },
+                  child: Container(
+                    width: 180,
+                    height: 160,
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(12),
                     child: Card(
-                      color: Colors.white,
+                      color: const Color.fromARGB(255, 194, 246, 217),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0)),
-                      elevation: 5,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.15,
-                                child: Image.network(
-                                  expert.imageUrl,
-                                  fit: BoxFit.cover,
-                                )),
-                            kHeight10,
-                            Text(
-                              expert.name,
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 7, 0, 0),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 23),
+                          borderRadius: BorderRadius.circular(15)),
+                      elevation: 3,
+                      child: Center(
+                        child: ListTile(
+                          leading: Container(
+                            width: 70,
+                            height: 100,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(7),
+                                border: Border.all(
+                                    color: Colors.green, width: 1.5)),
+                            child: Image.network(
+                              expert.imageUrl,
+                              fit: BoxFit.cover,
                             ),
-                            kHeight10,
-                            Text(
-                              expert.category,
-                              style: GoogleFonts.lato(
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromARGB(255, 18, 11, 11)),
-                            ),
-                          ]),
+                          ),
+                          title: Text(
+                            expert.name,
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 7, 0, 0),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 23),
+                          ),
+                          subtitle: Text(
+                            expert.category,
+                            style: GoogleFonts.lato(
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromARGB(255, 18, 11, 11)),
+                          ),
+                        ),
+                      ),
+                      // child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       SizedBox(
+                      //           width: MediaQuery.of(context).size.width * 0.35,
+                      //           height:
+                      //               MediaQuery.of(context).size.height * 0.15,
+                      //           child: Image.network(
+                      //             expert.imageUrl,
+                      //             fit: BoxFit.cover,
+                      //           )),
+                      //       kHeight10,
+                      //       Text(
+                      //         expert.name,
+                      //         style: const TextStyle(
+                      //             color: Color.fromARGB(255, 7, 0, 0),
+                      //             fontWeight: FontWeight.bold,
+                      //             fontSize: 23),
+                      //       ),
+                      //       kHeight10,
+                      //       Text(
+                      //         expert.category,
+                      //         style: GoogleFonts.lato(
+                      //             fontWeight: FontWeight.bold,
+                      //             color: const Color.fromARGB(255, 18, 11, 11)),
+                      //       ),
+                      //     ]),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             );
 
             // return Container(

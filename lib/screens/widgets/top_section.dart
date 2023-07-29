@@ -13,7 +13,7 @@ class TopSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
-    String firstLetter = userInfo!.email.substring(0, 1);
+    String firstLetter = userInfo!.name.substring(0, 1);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(

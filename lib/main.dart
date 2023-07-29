@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gro_better/model/user.dart';
+import 'package:gro_better/provider/doctor_search_provider.dart';
 import 'package:gro_better/provider/form.dart';
 import 'package:gro_better/provider/home_state.dart';
 import 'package:gro_better/provider/post_options_provider.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
             create: (context) => RegisterUserState()),
         ChangeNotifierProvider<HomeState>(create: (context) => HomeState()),
         ChangeNotifierProvider(create: (context) => PostOptionsProvider()),
+        ChangeNotifierProvider(create: (context) => DoctorSearchProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
