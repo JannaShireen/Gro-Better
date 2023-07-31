@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gro_better/model/user_info.dart';
 import 'package:gro_better/provider/user_provider.dart';
+import 'package:gro_better/screens/profile/login_again.dart';
 
 import 'package:gro_better/screens/widgets/my_records.dart';
 import 'package:gro_better/screens/widgets/my_thoughts.dart';
@@ -49,6 +50,7 @@ class ProfileScreen extends StatelessWidget {
             },
             onSelected: (value) {
               if (value == 0) {
+                _showDeleteAccountConfirmationDialog(context);
               } else if (value == 1) {
               } else if (value == 2) {
               } else if (value == 3) {
@@ -119,10 +121,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  Navigator.of(context).pop(); // Close the dialog
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginAgain()));
+                  // Navigator.of(context).pop(); // Close the dialog
                 },
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(kButtonColor)),
+                    backgroundColor: MaterialStateProperty.all(Colors.red)),
                 child: const Text('Delete Account'),
               ),
             ],
