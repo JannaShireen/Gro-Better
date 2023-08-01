@@ -3,7 +3,6 @@ import 'package:gro_better/screens/authenticate/widgets/text_form_field.dart';
 import 'package:gro_better/services/auth.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:lottie/lottie.dart';
-import 'package:restart_app/restart_app.dart';
 
 class LoginAgain extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -35,7 +34,6 @@ class LoginAgain extends StatelessWidget {
       AuthService()
           .deleteAccount(emailController.text, passwordController.text);
     }
-    Restart.restartApp();
   }
 
   @override

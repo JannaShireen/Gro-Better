@@ -58,9 +58,24 @@ class UpcomingEvents extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          ' Appointment date',
-                          style: TextStyle(color: Colors.grey),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              ' Appointment date',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            kWidth10,
+                            Icon(
+                              Icons.message,
+                              color: Colors.green,
+                            ),
+                            Icon(
+                              Icons.video_call,
+                              color: Colors.green,
+                              size: 33,
+                            ),
+                          ],
                         ),
                         kHeight10,
                         Row(
@@ -71,11 +86,6 @@ class UpcomingEvents extends StatelessWidget {
                               '   $monthName  ${dateTime.day.toString()} -  ${event['time']}',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const Icon(
-                              Icons.video_call,
-                              color: Colors.green,
-                              size: 33,
                             ),
                           ],
                         ),

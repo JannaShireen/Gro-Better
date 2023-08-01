@@ -16,46 +16,60 @@ class TopSection extends StatelessWidget {
     String firstLetter = userInfo!.name.substring(0, 1);
     return Container(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.black,
-            child: Text(
-              firstLetter,
-              style: const TextStyle(color: Colors.white, fontSize: 34),
-            ),
+          Column(
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.black,
+                child: Text(
+                  firstLetter,
+                  style: const TextStyle(color: Colors.white, fontSize: 34),
+                ),
+              ),
+              kHeight10,
+              Text(
+                ' ${userInfo.name}',
+                //'${document['name']}',
+                style: const TextStyle(
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              kHeight10,
+              Text(
+                'DOB:  ${'${userInfo.dob}'.split(" ")[0]}',
+                //  'DOB: ${'${document['DOB']}.'.split(" ")[0]}',
+                style: textStyle2,
+              ),
+              kHeight10,
+              Text(
+                'Sessions: ${userInfo.sessionCount}',
+                style: textStyle2,
+              ),
+            ],
           ),
-          Text(
-            ' ${userInfo.name}',
-            //'${document['name']}',
-            style: const TextStyle(
-              fontSize: 27,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          kHeight10,
-          Text(
-            'DOB:  ${'${userInfo.dob}'.split(" ")[0]}',
-            //  'DOB: ${'${document['DOB']}.'.split(" ")[0]}',
-            style: textStyle2,
-          ),
-          kHeight10,
-          Text(
-            'Bio ${userInfo.bioNotes ?? ''}',
-            style: textStyle2,
-          ),
-          kHeight10,
-          ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(kPrimaryColor)),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((context) => const EditProfile())));
-            },
-            child: const Text('Edit Bio'),
+          Column(
+            children: [
+              kHeight30,
+              Text(
+                ' ${userInfo.bioNotes ?? ''}',
+                style: textStyle2,
+              ),
+              kHeight20,
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(kPrimaryColor)),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: ((context) => const EditProfile())));
+                },
+                child: const Text('Edit Bio'),
+              ),
+            ],
           ),
         ],
       ),

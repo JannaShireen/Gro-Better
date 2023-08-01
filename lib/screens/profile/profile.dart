@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gro_better/model/user_info.dart';
 import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/screens/profile/login_again.dart';
+import 'package:gro_better/screens/widgets/about_us.dart';
 
 import 'package:gro_better/screens/widgets/my_records.dart';
 import 'package:gro_better/screens/widgets/my_thoughts.dart';
@@ -9,6 +10,8 @@ import 'package:gro_better/screens/widgets/top_section.dart';
 import 'package:gro_better/services/auth.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -16,14 +19,16 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthService auth = AuthService();
+
     UserDetails? userInfo = Provider.of<UserProvider>(context).getUser;
+    final String? username = userInfo?.email.split('@')[0];
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         elevation: 0.0,
         title: Text(
-          '${userInfo?.email}'.split('@')[0],
+          '@ $username',
           //  ' ${user.email}',
           //' ${document!['Email']}'.split("@")[0],
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
@@ -43,9 +48,10 @@ class ProfileScreen extends StatelessWidget {
                   child: Text('Delete My Account'),
                 ),
                 const PopupMenuItem(value: 1, child: Text('Bookmarks')),
-                const PopupMenuItem(value: 2, child: Text('Contact us')),
+                const PopupMenuItem(value: 2, child: Text('Feedback')),
                 const PopupMenuItem(value: 3, child: Text('Share this app')),
-                const PopupMenuItem(value: 4, child: Text('Log out')),
+                const PopupMenuItem(value: 4, child: Text('About us')),
+                const PopupMenuItem(value: 5, child: Text('Log out')),
               ];
             },
             onSelected: (value) {
@@ -53,8 +59,13 @@ class ProfileScreen extends StatelessWidget {
                 _showDeleteAccountConfirmationDialog(context);
               } else if (value == 1) {
               } else if (value == 2) {
+                _feedback();
               } else if (value == 3) {
+                Share.share('hey! Check out this new app......');
               } else if (value == 4) {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const AboutUs()));
+              } else if (value == 5) {
                 _showLogoutConfirmationDialog(context);
               }
             },
@@ -86,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                     child: TabBarView(
                       children: [
                         ThoughtsTab(),
-                        MyRecordsTab(),
+                        MyRecords(),
                       ],
                     ),
                   ),
@@ -97,6 +108,14 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future _feedback() async {
+    const url =
+        'mailto:jannashireen@gmail.com?subject=Review on Gro Better App &body= I have a concern';
+    Uri uri = Uri.parse(url);
+
+    await launchUrl(uri);
   }
 
   void _showDeleteAccountConfirmationDialog(BuildContext context) {

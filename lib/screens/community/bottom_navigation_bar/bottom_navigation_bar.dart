@@ -57,6 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: 'Experts',
               ),
               BottomNavigationBarItem(
+                icon: Icon(Icons.message, color: kBackgroundColor),
+                label: 'Messages',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.person, color: kBackgroundColor),
                 label: 'Profile',
               ),

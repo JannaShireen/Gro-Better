@@ -28,7 +28,6 @@ class DatabaseService {
   Future editUserData(String bioNotes, String nationality) async {
     await userCollection.doc(uid).update({
       'BioNotes': bioNotes,
-      'Nationality': nationality,
     });
   }
 

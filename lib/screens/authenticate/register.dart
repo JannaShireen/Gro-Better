@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gro_better/screens/authenticate/widgets/text_form_field.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:gro_better/shared/loading.dart';
 import 'package:provider/provider.dart';
@@ -45,17 +46,15 @@ class RegisterUser extends StatelessWidget {
                               style: headingTextStyle,
                             ),
                             kHeight30,
-                            TextFormField(
-                              onChanged: (value) => state.name = value,
-                              decoration: textInputDecoration.copyWith(
-                                hintText: 'Full Name',
-                              ),
+                            TextFormFieldWidget(
+                              hintText: 'Full name',
+                              onChanged: (value) {
+                                state.name = value;
+                              },
                             ),
                             kHeight20,
-                            TextFormField(
-                              decoration: textInputDecoration.copyWith(
-                                hintText: 'Email',
-                              ),
+                            TextFormFieldWidget(
+                              hintText: 'Email',
                               validator: (val) =>
                                   val!.isEmpty ? 'Enter an email' : null,
                               onChanged: (val) {
@@ -63,10 +62,8 @@ class RegisterUser extends StatelessWidget {
                               },
                             ),
                             kHeight20,
-                            TextFormField(
-                              decoration: textInputDecoration.copyWith(
-                                hintText: 'Password',
-                              ),
+                            TextFormFieldWidget(
+                              hintText: 'Password',
                               validator: (value) => value!.length < 6
                                   ? 'Password must be at least 6 characters long'
                                   : null,
@@ -76,10 +73,8 @@ class RegisterUser extends StatelessWidget {
                               },
                             ),
                             kHeight20,
-                            TextFormField(
-                              decoration: textInputDecoration.copyWith(
-                                hintText: 'Confirm Password',
-                              ),
+                            TextFormFieldWidget(
+                              hintText: 'Confirm Password',
                               validator: (value) => value != state.password
                                   ? 'Password do not match'
                                   : null,

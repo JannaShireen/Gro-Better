@@ -219,23 +219,19 @@ class _SignInState extends State<SignIn> {
                             kHeight20,
 
                             // Don't have an account?
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    "Don't have an account yet? ",
-                                    style: textStyle2,
-                                  ),
-                                  TextButton.icon(
-                                      onPressed: () {
-                                        widget.toggleView();
-                                      },
-                                      icon: const Icon(Icons.app_registration),
-                                      label: const Text('Register here')),
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                const Text(
+                                  "Don't have an account yet? ",
+                                  style: textStyle2,
+                                ),
+                                TextButton.icon(
+                                    onPressed: () {
+                                      widget.toggleView();
+                                    },
+                                    icon: const Icon(Icons.app_registration),
+                                    label: const Text('Register here')),
+                              ],
                             ),
 
                             //  kHeight20,

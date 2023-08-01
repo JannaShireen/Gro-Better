@@ -23,6 +23,7 @@ class CommunityScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: kBackgroundColor,
         title: Text(
@@ -57,9 +58,9 @@ class CommunityScreen extends StatelessWidget {
             const SizedBox(
                 height:
                     12), // Add some space between the text and FutureBuilder
-            FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-              future:
-                  FetchBookings(uId: currentuserId).fetchFirstUpcomingBooking(),
+            StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+              stream: FetchBookings(uId: currentuserId)
+                  .streamFirstUpcomingBooking(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Loading();
@@ -108,16 +109,17 @@ class CommunityScreen extends StatelessWidget {
                   String month = DateFormat('MMM').format(dateTime);
                   //  print('upcoming events $upcomingEventSnapshot');
                   return Container(
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          color: kPrimaryColor),
-                      height: MediaQuery.of(context).size.height * 0.12,
-                      child: Center(
-                        child: Text(
-                          'You have an appointment at $time \non $day, $month ${dateTime.day}. ',
-                          style: kTextStyle,
-                        ),
-                      ));
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: kPrimaryColor),
+                    height: MediaQuery.of(context).size.height * 0.12,
+                    child: Center(
+                      child: Text(
+                        'You have an appointment at $time \non $day, $month ${dateTime.day}. ',
+                        style: kTextStyle,
+                      ),
+                    ),
+                  );
                 }
               },
             ),

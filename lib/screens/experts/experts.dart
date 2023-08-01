@@ -80,13 +80,15 @@ class ListofDoctors extends StatelessWidget {
                             width: 70,
                             height: 100,
                             decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(expert.imageUrl)),
                                 borderRadius: BorderRadius.circular(7),
                                 border: Border.all(
                                     color: Colors.green, width: 1.5)),
-                            child: Image.network(
-                              expert.imageUrl,
-                              fit: BoxFit.cover,
-                            ),
+                            // child: Image.network(
+                            //   expert.imageUrl,
+                            //   fit: BoxFit.cover,
+                            // ),
                           ),
                           title: Text(
                             expert.name,

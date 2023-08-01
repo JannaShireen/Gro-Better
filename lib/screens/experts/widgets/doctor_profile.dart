@@ -39,7 +39,6 @@ class DoctorProfile extends StatelessWidget {
           SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(12),
-              decoration: const BoxDecoration(gradient: gradientColor),
               child: Column(children: [
                 //Doctor's Image
                 Column(

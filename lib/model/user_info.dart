@@ -6,27 +6,25 @@ class UserDetails {
   final String email;
   final DateTime dob;
   final String? bioNotes;
-  final String? nationality;
+
   final String imageUrl;
   final int? sessionCount;
   List<String> sessionNotes = [];
   List<String> posts = [];
-  List<String> comments = [];
+
   UserDetails({
     required this.uid,
     required this.name,
     required this.email,
     required this.dob,
     this.bioNotes,
-    this.nationality,
     this.sessionCount,
     this.imageUrl = "",
     List<String> sessionNotes = const [],
     List<String> posts = const [],
     List<String> comments = const [],
   })  : sessionNotes = sessionNotes,
-        posts = posts,
-        comments = comments;
+        posts = posts;
 
   Map<String, dynamic> toJson() {
     return {
@@ -35,11 +33,9 @@ class UserDetails {
       "Username": email,
       "DateOfBirth": dob,
       "BioNotes": bioNotes,
-      "Nationality": nationality,
       "SessionCount": sessionCount,
       "SessionNotes": sessionNotes,
       "Posts": posts,
-      "Comments": comments,
       "imageUrl": imageUrl,
     };
   }
@@ -52,8 +48,7 @@ class UserDetails {
         email: snapshot['Username'],
         dob: (snapshot['DateOfBirth'] as Timestamp).toDate(),
         bioNotes: snapshot['BioNotes'],
-        nationality: snapshot['nationality'],
-        sessionCount: snapshot['sessionCount'],
+        sessionCount: snapshot['sessionCount'] ?? 0,
         sessionNotes: List<String>.from(snapshot['SessionNotes'] ?? []),
         posts: List<String>.from(snapshot['Posts'] ?? []),
         comments: List<String>.from(snapshot['Comments'] ?? []),
