@@ -29,8 +29,7 @@ class ProfileScreen extends StatelessWidget {
         elevation: 0.0,
         title: Text(
           '@ $username',
-          //  ' ${user.email}',
-          //' ${document!['Email']}'.split("@")[0],
+        
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

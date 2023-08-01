@@ -133,6 +133,8 @@ class _BookAppointmentState extends State<BookAppointment> {
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Perform booking procedures here after successful payment
     _bookAppointment(response.paymentId!);
+    _addExperts();
+    _addClients();
 
     // Navigate to the success booking page
 
@@ -453,6 +455,74 @@ class _BookAppointmentState extends State<BookAppointment> {
       } catch (e) {
         print('Error adding booking: $e');
       }
+    }
+  }
+
+  // function to add a new client to myClient list in the Expert Collection
+  Future _addClients() async {
+    UserDetails? currentUser =
+        Provider.of<UserProvider>(context, listen: false).getUser;
+    String clientName = currentUser!.name;
+
+    try {
+      // Get the reference to the 'myClients' collection
+      CollectionReference myClientsCollection = FirebaseFirestore.instance
+          .collection('Experts')
+          .doc(widget.expert.id)
+          .collection('myClients');
+
+      // Query to check if the client name already exists in the collection
+      QuerySnapshot querySnapshot = await myClientsCollection
+          .where('id', isEqualTo: currentUser.uid)
+          .get();
+
+      // If the client name does not exist in the collection, add it
+      if (querySnapshot.docs.isEmpty) {
+        await myClientsCollection.add({
+          'id': currentUser.uid,
+          'name': clientName,
+          'email': currentUser.email,
+        });
+        debugPrint('Client added successfully.');
+      } else {
+        debugPrint('Client already exists in the collection.');
+      }
+    } catch (e) {
+      print('Error adding client: $e');
+    }
+  }
+
+//Function to add new doctor to myDoctors collection in the user Collection
+  Future _addExperts() async {
+    UserDetails? currentUser =
+        Provider.of<UserProvider>(context, listen: false).getUser;
+    String clientName = currentUser!.name;
+
+    try {
+      // Get the reference to the 'myClients' collection
+      CollectionReference myExpertsCollection = FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .collection('myExperts');
+
+      // Query to check if the client name already exists in the collection
+      QuerySnapshot querySnapshot = await myExpertsCollection
+          .where('name', isEqualTo: widget.expert.id)
+          .get();
+
+      // If the client name does not exist in the collection, add it
+      if (querySnapshot.docs.isEmpty) {
+        await myExpertsCollection.add({
+          'id': widget.expert.id,
+          'name': widget.expert.name,
+          'email': widget.expert.email,
+        });
+        debugPrint('Client added successfully.');
+      } else {
+        debugPrint('Client already exists in the collection.');
+      }
+    } catch (e) {
+      print('Error adding client: $e');
     }
   }
 }
