@@ -70,11 +70,6 @@ class ThoughtsTab extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: PostCard(post: post),
                 );
-                // return ListTile(
-                //   title: Text(post.content),
-                //   subtitle: Text(post.username),
-                //   // Customize the ListTile as needed
-                // );
               },
             );
           }

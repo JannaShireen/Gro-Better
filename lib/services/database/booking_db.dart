@@ -33,19 +33,7 @@ class FetchBookings {
 
     return ref.where('date', isLessThan: DateTime.now()).snapshots();
   }
-  // Future<DocumentSnapshot<Map<String, dynamic>>>
-  //     fetchFirstUpcomingBooking() async {
-  //   DocumentSnapshot<Map<String, dynamic>> upcomingEvent = await userCollection
-  //       .doc(uId)
-  //       .collection('myBookings')
-  //       .where('date', isGreaterThanOrEqualTo: DateTime.now())
-  //       .orderBy('date')
-  //       .limit(1)
-  //       .get()
-  //       .then((querySnapshot) => querySnapshot.docs.first);
 
-  //   return upcomingEvent;
-  // }
   Stream<DocumentSnapshot<Map<String, dynamic>>> streamFirstUpcomingBooking() {
     return userCollection
         .doc(uId)

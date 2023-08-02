@@ -58,9 +58,6 @@ class DatabaseService {
     return userCollection.snapshots();
   }
 
-  // Stream<DocumentSnapshot> getUserStream(String uid) {
-  //   return FirebaseFirestore.instance.collection('users').doc(uid).snapshots();
-  // }
   Future<String> updateImageToStorage(String uid, File imageFile) async {
     try {
       String filename = DateTime.now().millisecondsSinceEpoch.toString();
@@ -75,15 +72,4 @@ class DatabaseService {
       rethrow;
     }
   }
-
-  //    Stream<List<String>> getDoctorsStream(String userId) {
-  //   // Reference to the 'doctors' subcollection under the specified user's document
-  //   CollectionReference doctorsCollection =
-  //       userCollection.doc(userId).collection('myExperts');
-
-  //   // Stream to listen for changes in the 'doctors' subcollection
-  //   return doctorsCollection.snapshots().map((snapshot) {
-  //     return snapshot.docs.map((doc) => doc.data()['name'] as String).toList();
-  //   });
-  // }
 }

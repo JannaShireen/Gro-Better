@@ -9,7 +9,7 @@ class SuccessBooking extends StatelessWidget {
   final String image;
   final String name;
   final String category;
-  final String paymentId;
+
   const SuccessBooking({
     Key? key,
     required this.image,
@@ -17,7 +17,6 @@ class SuccessBooking extends StatelessWidget {
     required this.category,
     required this.date,
     required this.time,
-    required this.paymentId,
   }) : super(key: key);
 
   @override
@@ -96,10 +95,6 @@ class SuccessBooking extends StatelessWidget {
                     style: const TextStyle(fontSize: 15),
                   ),
                   kHeight10,
-                  Text(
-                    'Payment Id:  $paymentId',
-                    style: const TextStyle(fontSize: 15),
-                  ),
                 ],
               ),
             ),

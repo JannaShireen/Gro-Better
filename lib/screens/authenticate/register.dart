@@ -93,11 +93,6 @@ class RegisterUser extends StatelessWidget {
                                     const Text('Date of Birth',
                                         style: textStyle2),
                                     kWidth10,
-                                    // if (state.date == null)
-                                    //   const Text('')
-                                    // else
-                                    //   Text(parseDate(state.date),
-                                    //       style: textStyle2),
                                     kWidth10,
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(

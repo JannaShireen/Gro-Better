@@ -1,19 +1,22 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:gro_better/model/experts.dart';
 import 'package:gro_better/model/user_info.dart';
 import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/screens/appointment/widgets/success_booking.dart';
 import 'package:gro_better/shared/constants.dart';
-import 'package:gro_better/shared/razorpay_key.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 class BookAppointment extends StatefulWidget {
   final ExpertInfo expert;
+
   const BookAppointment({required this.expert, Key? key}) : super(key: key);
 
   @override
@@ -21,7 +24,6 @@ class BookAppointment extends StatefulWidget {
 }
 
 class _BookAppointmentState extends State<BookAppointment> {
-  final Razorpay _razorpay = Razorpay();
   CalendarFormat _format = CalendarFormat.month;
   DateTime _focusDay = DateTime.now();
   DateTime _currentDay = DateTime.now();
@@ -32,6 +34,7 @@ class _BookAppointmentState extends State<BookAppointment> {
   String selectedTime = '';
   Future<List<String>>? _updateAvailableSlotsFuture;
   List<String> _disabledTimeSlots = [];
+  Map<String, dynamic>? paymentIntent;
 
   List<String> generateTimeSlots(TimeOfDay fromTime, TimeOfDay toTime) {
     final List<String> timeSlots = [];
@@ -119,46 +122,42 @@ class _BookAppointmentState extends State<BookAppointment> {
         DateTime.now().weekday == DateTime.sunday);
     _dateSelected = false;
     super.initState();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
   @override
   void dispose() {
-    _razorpay.clear();
     super.dispose();
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    // Perform booking procedures here after successful payment
-    _bookAppointment(response.paymentId!);
-    _addExperts();
-    _addClients();
+  // void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  //   // Perform booking procedures here after successful payment
+  //   _bookAppointment(response.paymentId!);
+  //   _addExperts();
+  //   _addClients();
 
-    // Navigate to the success booking page
+  //   // Navigate to the success booking page
 
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => SuccessBooking(
-        paymentId: response.paymentId!,
-        date: DateFormat('MMMM d').format(_currentDay),
-        time: selectedTime,
-        category: widget.expert.category,
-        image: widget.expert.imageUrl,
-        name: widget.expert.name,
-      ),
-    ));
-  }
+  //   Navigator.of(context).push(MaterialPageRoute(
+  //     builder: (context) => SuccessBooking(
+  //       paymentId: response.paymentId!,
+  //       date: DateFormat('MMMM d').format(_currentDay),
+  //       time: selectedTime,
+  //       category: widget.expert.category,
+  //       image: widget.expert.imageUrl,
+  //       name: widget.expert.name,
+  //     ),
+  //   ));
+  // }
 
-  void _handlePaymentError(PaymentFailureResponse response) {
-    // Handle payment failure, if needed
-    print("Payment error: ${response.message}");
-  }
+  // void _handlePaymentError(PaymentFailureResponse response) {
+  //   // Handle payment failure, if needed
+  //   print("Payment error: ${response.message}");
+  // }
 
-  void _handleExternalWallet(ExternalWalletResponse response) {
-    // Handle external wallet response, if needed
-    print("External wallet: ${response.walletName}");
-  }
+  // void _handleExternalWallet(ExternalWalletResponse response) {
+  //   // Handle external wallet response, if needed
+  //   print("External wallet: ${response.walletName}");
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -324,29 +323,27 @@ class _BookAppointmentState extends State<BookAppointment> {
                 ),
                 child: const Text('Book Now'),
                 onPressed: () async {
-                  if (_timeSelected && _dateSelected) {
-                    final multipliedFee = widget.expert.fee! * 100;
-                    final options = {
-                      'key': myRazorPayKey,
-                      'amount':
-                          multipliedFee, // amount in paise (e.g., for Rs. 100, it should be 10000)
-                      'name': 'Gro Better',
-                      'description': 'Appointment Booking',
-                      'prefill': {
-                        // User's phone number
-                        'email': currentUser!.email, // User's email address
-                      },
-                    };
+                  makePayment().then((paymentId) {
+                    // The code inside this block will execute after makePayment completes successfully
+                    _bookAppointment();
+                    _addExperts();
+                    _addClients();
 
-                    try {
-                      _razorpay.open(options);
-                    } catch (e) {
-                      print('Error initiating payment: $e');
-                      Fluttertoast.showToast(
-                          msg: 'Error occured during payment',
-                          timeInSecForIosWeb: 4);
-                    }
-                  }
+                    // Navigate to the success booking page
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => SuccessBooking(
+                        date: DateFormat('MMMM d').format(_currentDay),
+                        time: selectedTime,
+                        category: widget.expert.category,
+                        image: widget.expert.imageUrl,
+                        name: widget.expert.name,
+                      ),
+                    ));
+                  }).catchError((error) {
+                    // Handle any errors that occur during the makePayment process
+                    // For example, you could show an error message to the user
+                    print('Error during payment: $error');
+                  });
                 },
               ),
             ),
@@ -415,7 +412,107 @@ class _BookAppointmentState extends State<BookAppointment> {
     );
   }
 
-  void _bookAppointment(String responseId) async {
+  Future<void> makePayment() async {
+    if (_timeSelected && _dateSelected) {
+      // final multipliedFee = widget.expert.fee! * 100;
+
+      try {
+        //STEP 1: Create Payment Intent
+        paymentIntent = await createPaymentIntent('500', 'INR');
+
+        //STEP 2: Initialize Payment Sheet
+        await Stripe.instance
+            .initPaymentSheet(
+                paymentSheetParameters: SetupPaymentSheetParameters(
+                    paymentIntentClientSecret: paymentIntent![
+                        'client_secret'], //Gotten from payment intent
+                    style: ThemeMode.dark,
+                    merchantDisplayName: 'Janna'))
+            .then((value) {});
+
+        //STEP 3: Display Payment sheet
+        await displayPaymentSheet();
+        // Perform booking procedures here after successful payment
+
+        //
+      } catch (err) {
+        throw Exception(err);
+      }
+    }
+  }
+
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet().then((value) {
+        showDialog(
+            context: context,
+            builder: (_) => const AlertDialog(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 100.0,
+                      ),
+                      SizedBox(height: 10.0),
+                      Text("Payment Successful!"),
+                    ],
+                  ),
+                ));
+
+        paymentIntent = null;
+      }).onError((error, stackTrace) {
+        throw Exception(error);
+      });
+    } on StripeException catch (e) {
+      print('Error is:---> $e');
+      const AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.cancel,
+                  color: Colors.red,
+                ),
+                Text("Payment Failed"),
+              ],
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      print('$e');
+    }
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      //Request body
+      Map<String, dynamic> body = {
+        'amount': calculateAmount(amount),
+        'currency': currency,
+      };
+
+      //Make post request to Stripe
+      var response = await http.post(
+        Uri.parse('https://api.stripe.com/v1/payment_intents'),
+        headers: {
+          'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body,
+      );
+      print('Payment Intent Body->>> ${response.body.toString()}');
+      return jsonDecode(response.body);
+    } catch (err) {
+      throw Exception(err.toString());
+    }
+  }
+
+  void _bookAppointment() async {
     UserDetails? currentUser =
         Provider.of<UserProvider>(context, listen: false).getUser;
 
@@ -430,7 +527,6 @@ class _BookAppointmentState extends State<BookAppointment> {
             .doc(widget.expert.id)
             .collection('bookings')
             .add({
-          'payment_id': responseId,
           'date': getDate,
           'day': weekDay,
           'time': selectedTime,
@@ -443,7 +539,6 @@ class _BookAppointmentState extends State<BookAppointment> {
             .doc(currentuserId)
             .collection('myBookings')
             .add({
-          'payment_id': responseId,
           'date': getDate,
           'day': weekDay,
           'time': selectedTime,
@@ -524,5 +619,10 @@ class _BookAppointmentState extends State<BookAppointment> {
     } catch (e) {
       print('Error adding client: $e');
     }
+  }
+
+  calculateAmount(String amount) {
+    final calculatedAmount = (int.parse(amount)) * 100;
+    return calculatedAmount.toString();
   }
 }
