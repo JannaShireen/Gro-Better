@@ -129,36 +129,6 @@ class _BookAppointmentState extends State<BookAppointment> {
     super.dispose();
   }
 
-  // void _handlePaymentSuccess(PaymentSuccessResponse response) {
-  //   // Perform booking procedures here after successful payment
-  //   _bookAppointment(response.paymentId!);
-  //   _addExperts();
-  //   _addClients();
-
-  //   // Navigate to the success booking page
-
-  //   Navigator.of(context).push(MaterialPageRoute(
-  //     builder: (context) => SuccessBooking(
-  //       paymentId: response.paymentId!,
-  //       date: DateFormat('MMMM d').format(_currentDay),
-  //       time: selectedTime,
-  //       category: widget.expert.category,
-  //       image: widget.expert.imageUrl,
-  //       name: widget.expert.name,
-  //     ),
-  //   ));
-  // }
-
-  // void _handlePaymentError(PaymentFailureResponse response) {
-  //   // Handle payment failure, if needed
-  //   print("Payment error: ${response.message}");
-  // }
-
-  // void _handleExternalWallet(ExternalWalletResponse response) {
-  //   // Handle external wallet response, if needed
-  //   print("External wallet: ${response.walletName}");
-  // }
-
   @override
   Widget build(BuildContext context) {
     TimeOfDay fromTimeOfDay = TimeOfDay.fromDateTime(widget.expert.fromTime);
@@ -323,27 +293,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                 ),
                 child: const Text('Book Now'),
                 onPressed: () async {
-                  makePayment().then((paymentId) {
-                    // The code inside this block will execute after makePayment completes successfully
-                    _bookAppointment();
-                    _addExperts();
-                    _addClients();
-
-                    // Navigate to the success booking page
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => SuccessBooking(
-                        date: DateFormat('MMMM d').format(_currentDay),
-                        time: selectedTime,
-                        category: widget.expert.category,
-                        image: widget.expert.imageUrl,
-                        name: widget.expert.name,
-                      ),
-                    ));
-                  }).catchError((error) {
-                    // Handle any errors that occur during the makePayment process
-                    // For example, you could show an error message to the user
-                    print('Error during payment: $error');
-                  });
+                  await makePayment();
                 },
               ),
             ),
@@ -432,7 +382,23 @@ class _BookAppointmentState extends State<BookAppointment> {
 
         //STEP 3: Display Payment sheet
         await displayPaymentSheet();
+
         // Perform booking procedures here after successful payment
+        _bookAppointment();
+        await _addExperts();
+        await _addClients();
+        Future.delayed(const Duration(milliseconds: 3));
+
+        // Navigate to the success booking page
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SuccessBooking(
+            date: DateFormat('MMMM d').format(_currentDay),
+            time: selectedTime,
+            category: widget.expert.category,
+            image: widget.expert.imageUrl,
+            name: widget.expert.name,
+          ),
+        ));
 
         //
       } catch (err) {
