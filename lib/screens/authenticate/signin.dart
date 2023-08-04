@@ -62,7 +62,7 @@ class _SignInState extends State<SignIn> {
                             kHeight10,
 
                             // welcome back, you've been missed!
-                            const Text('Welcome! Sign In to get better',
+                            const Text('Sign in to gro better together',
                                 style: textStyle2),
 
                             kHeight20,

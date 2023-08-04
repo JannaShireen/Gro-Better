@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:gro_better/provider/home_state.dart';
-import 'package:gro_better/provider/user_provider.dart';
-import 'package:gro_better/services/auth.dart';
+import 'package:gro_better/services/zego/zego_services.dart';
 
 import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
@@ -16,21 +15,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    addData();
-  }
-
-  addData() async {
-    UserProvider userProvider = Provider.of(context, listen: false);
-    await userProvider.refreshUser();
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    ZegoServices(ctx: context).onUserLogin();
   }
 
   @override
   Widget build(BuildContext context) {
     //  final currentuserId = FirebaseAuth.instance.currentUser!.uid;
-    final AuthService auth = AuthService();
 
     return Consumer<HomeState>(
       builder: (context, bottomNavState, _) {
@@ -58,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.message, color: kBackgroundColor),
-                label: 'Messages',
+                label: 'Conversations',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person, color: kBackgroundColor),

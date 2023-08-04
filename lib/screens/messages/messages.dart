@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
 import 'package:gro_better/shared/constants.dart';
 
-class Messages extends StatelessWidget {
-  const Messages({super.key});
+class ConversationList extends StatelessWidget {
+  const ConversationList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class Messages extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         automaticallyImplyLeading: false,
-        title: const Text('Messages'),
+        title: const Text('Conversations'),
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
