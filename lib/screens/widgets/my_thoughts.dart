@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gro_better/model/post.dart';
 import 'package:gro_better/screens/community/widgets/post_card.dart';
@@ -14,7 +15,7 @@ class ThoughtsTab extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection('posts')
-          .where('authorId', isEqualTo: currentuserId)
+          .where('authorId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

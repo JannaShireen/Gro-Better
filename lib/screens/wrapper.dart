@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gro_better/model/user.dart';
+import 'package:gro_better/provider/user_provider.dart';
 import 'package:gro_better/screens/authenticate/authenticate.dart';
 import 'package:gro_better/screens/community/bottom_navigation_bar/bottom_navigation_bar.dart';
 
@@ -10,11 +11,17 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void addData() async {
+      UserProvider userProvider = Provider.of(context, listen: false);
+      await userProvider.refreshUser();
+    }
+
     final user = Provider.of<UserModel?>(context);
     if (user == null) {
-      return Authenticate();
+      return const Authenticate();
     } else {
-      return HomeScreen();
+      addData();
+      return const HomeScreen();
 
       //return either home or authenticate widget
     }

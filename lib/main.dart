@@ -13,6 +13,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:gro_better/services/auth.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
+import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,11 +24,27 @@ Future<void> main() async {
   //Load our .env file that contains our Stripe Secret key
   await dotenv.load(fileName: "assets/.env");
   await Firebase.initializeApp();
-  runApp(const MyApp());
+
+  //Define a navigator key
+  final navigatorKey = GlobalKey<NavigatorState>();
+  ZegoUIKitPrebuiltCallInvitationService().setNavigatorKey(navigatorKey);
+
+  ZegoUIKit().initLog().then((value) {
+    ///  Call the `useSystemCallingUI` method
+    ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
+      [ZegoUIKitSignalingPlugin()],
+    );
+
+    runApp(MyApp(navigatorKey: navigatorKey));
+  });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final GlobalKey<NavigatorState> navigatorKey;
+  const MyApp({
+    required this.navigatorKey,
+    Key? key,
+  }) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -43,6 +61,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DoctorSearchProvider())
       ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Gro Better',
         theme: ThemeData(
