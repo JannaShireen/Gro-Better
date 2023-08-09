@@ -19,7 +19,6 @@ class PostViewWidget extends StatelessWidget {
             final List<Post> posts = snapshot.data!.docs
                 .map((doc) => Post.fromDocumentSnapshot(doc))
                 .toList();
-            // final documents = snapshot.data!.docs;
 
             return Container(
               padding: const EdgeInsets.all(10.0), // Add desired spacing
@@ -28,7 +27,6 @@ class PostViewWidget extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: posts.length,
                   itemBuilder: (BuildContext context, int index) {
-                    // final post = documents[index];
                     return PostCard(
                       post: posts[index],
                     );
@@ -42,32 +40,3 @@ class PostViewWidget extends StatelessWidget {
         });
   }
 }
-
-
-
-
-    
-                  // child: ListTile(
-                  //   title: Row(
-                  //     children: [
-                  //       const CircleAvatar(
-                  //         child: Icon(Icons.person),
-                  //       ),
-                  //       const SizedBox(width: 10),
-                  //       Consumer<PostOptionsProvider>(
-                  //         builder: (context, provider, child) {
-                  //           return Text(
-                  //             provider.isAnonymous
-                  //                 ? 'Anonymous'
-                  //                 : post.username,
-                  //             style: textStyle2,
-                  //           );
-                  //         },
-                  //       ),
-                  //     ],
-                  //   ),
-                  //   //Text(post.username),
-                  //   subtitle: Text(post.content),
-                  //   // Display other post information as needed
-                  // ),
-    

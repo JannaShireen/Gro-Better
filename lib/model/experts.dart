@@ -48,8 +48,6 @@ class ExpertInfo {
       "about": about,
       "fromTime": fromTime,
       "toTime": toTime,
-      // "fromTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(fromTime),
-      // "toTime": DateFormat('yyyy-MM-dd HH:mm:ss').format(toTime),
     };
   }
 

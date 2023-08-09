@@ -10,22 +10,15 @@ class DoctorShortBio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: const [
+      children: [
         kHeight20,
         ProfilePic(
           imageUrl: 'alan.jpg',
         ),
         DrBioNotes(),
-
-        // ElevatedButton(
-        //     onPressed: () {},
-        //     child: Text(
-        //       'Book',
-        //       style: GoogleFonts.lato(),
-        //     ))
       ],
     );
   }
@@ -39,7 +32,7 @@ class DrBioNotes extends StatelessWidget {
     return Column(
       children: [
         kHeight10,
-        Text(
+        const Text(
           'Ryan Reynolds',
           style: headingTextStyle,
         ),

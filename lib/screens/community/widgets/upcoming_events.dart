@@ -5,7 +5,6 @@ import 'package:gro_better/services/database/booking_db.dart';
 import 'package:gro_better/shared/constants.dart';
 import 'package:gro_better/shared/loading.dart';
 import 'package:intl/intl.dart';
-import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 class UpcomingEvents extends StatelessWidget {
   const UpcomingEvents({super.key});
@@ -72,12 +71,6 @@ class UpcomingEvents extends StatelessWidget {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold),
                               ),
-
-                              // Icon(
-                              //   Icons.video_call,
-                              //   color: Colors.green,
-                              //   size: 33,
-                              // ),
                             ],
                           ),
                           kHeight20,

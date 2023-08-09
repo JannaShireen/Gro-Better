@@ -102,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
 
   Future _feedback() async {
     const url =
-        'mailto:jannashireen@gmail.com?subject=Review on Gro Better App &body= I have a concern';
+        'mailto:grobetterqa@gmail.com?subject=Feedback on Gro Better App &body= I have a concern';
     Uri uri = Uri.parse(url);
 
     await launchUrl(uri);

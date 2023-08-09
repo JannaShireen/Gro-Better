@@ -158,14 +158,5 @@ class CreatePostWidget extends StatelessWidget {
       likes: [],
     );
     await PostServices(uid: currentuserId).postStatus(newPost);
-    // print(
-    //     'Value of isAnonymous after creating Post object ${newPost.isAnonymous}');
-    // String? statusID =
-
-    //print('status updated and id is $statusID');
-    // if (statusID != null) {
-    //   await PostServices(uid: currentuserId)
-    //       .updateStatusReferenceInUser(currentuserId, statusID);
-    // }
   }
 }

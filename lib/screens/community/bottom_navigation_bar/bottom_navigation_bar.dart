@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gro_better/provider/home_state.dart';
@@ -32,37 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
             child: bottomNavState.widgetOptions
                 .elementAt(bottomNavState.selectedIndex),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            enableFeedback: true,
-            backgroundColor: kPrimaryColor,
-            selectedItemColor: kDefaultIconDarkColor,
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: kBackgroundColor,
-                ),
-                label: 'Community',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.medical_services, color: kBackgroundColor),
-                label: 'Experts',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.message, color: kBackgroundColor),
-                label: 'Conversations',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person, color: kBackgroundColor),
-                label: 'Profile',
-              ),
-            ],
-            currentIndex: bottomNavState.selectedIndex,
-            onTap: (index) {
-              bottomNavState.onItemTapped(index);
-            },
-          ),
+          bottomNavigationBar: CurvedNavigationBar(
+              backgroundColor: kBackgroundColor,
+              animationDuration: const Duration(milliseconds: 300),
+              color: kPrimaryColor,
+              onTap: (index) {
+                bottomNavState.onItemTapped(index);
+              },
+
+              // currentIndex: bottomNavState.selectedIndex,
+              items: const [
+                Icon(Icons.home_filled),
+                Icon(Icons.medical_services),
+                Icon(Icons.message),
+                Icon(Icons.person)
+              ]),
         );
       },
     );

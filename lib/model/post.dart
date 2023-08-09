@@ -7,7 +7,7 @@ class Post {
   final String content;
   final bool isAnonymous;
   final List likes;
-  final Timestamp timeStamp; // Change the type to int
+  final Timestamp timeStamp;
   int likeCount;
   bool isSaved;
 
@@ -44,7 +44,7 @@ class Post {
         authorId: data['authorId'],
         username: data['username'] ?? " ",
         content: data['content'] ?? '',
-        timeStamp: data['timestamp'], // Convert to int
+        timeStamp: data['timestamp'],
         isAnonymous: data['isAnonymous'] ?? false,
         likeCount: data['likeCount'] ?? 0,
         isSaved: data['isSaved'] ?? false,

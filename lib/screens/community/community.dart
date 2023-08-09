@@ -27,7 +27,7 @@ class CommunityScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: kBackgroundColor,
         title: Text(
-          'Hello, ${userInfo?.name ?? ''}',
+          'Hello, ${userInfo.name ?? ''}',
           style:
               const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),

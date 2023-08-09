@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 var currentuserId = FirebaseAuth.instance.currentUser!.uid;
-const kPrimaryColor = Color.fromARGB(255, 5, 118, 88);
+const kPrimaryColor = Color.fromARGB(255, 3, 161, 63);
 
 const kTextColor = Color(0xFF3C4046);
 const kTextColor2 = Colors.white;
 const kButtonColor = Color.fromARGB(255, 143, 184, 184);
-const kBackgroundColor = Color.fromARGB(255, 193, 225, 193);
+const kBackgroundColor = Color.fromARGB(255, 241, 236, 230);
 const kBackgroundColor2 = Color.fromARGB(255, 254, 240, 226);
 const kWidth10 = SizedBox(
   width: 10,

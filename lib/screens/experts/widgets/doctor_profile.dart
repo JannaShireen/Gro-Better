@@ -58,11 +58,6 @@ class DoctorProfile extends StatelessWidget {
                       ),
                     ),
 
-                    // child: Image.network(
-                    //   expert.imageUrl,
-                    //   fit: BoxFit.cover,
-                    // )
-
                     kHeight20,
 
                     //Doctor's name and other info
@@ -216,124 +211,7 @@ class DoctorProfile extends StatelessWidget {
                   ],
                 ),
 
-                //       kWidth10,
-                //       Column(
-                //         children: [
-                //           Text(
-                //             expert.name,
-                //             style: headingTextStyle,
-                //           ),
-                //           kHeight10,
-                //           Text(
-                //             expert.category,
-                //             style: GoogleFonts.lato(
-                //                 fontWeight: FontWeight.bold,
-                //                 color: Colors.white),
-                //           ),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // Padding(
-                //   padding:
-                //       const EdgeInsets.only(left: 30, top: 10, bottom: 10),
-                //   child: Container(
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(8),
-                //       color: kDefaultIconLightColor,
-                //     ),
-                //     padding: const EdgeInsets.all(10),
-                //     child: Text('${expert.sessionCount} sessions'),
-                //   ),
-                // ),
-                // DividerTeal,
-                // kHeight10,
-                // Text('What can I help you achieve:',
-                //     style: headingTextStyle),
-                // kHeight20,
-                // GridView.builder(
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   itemCount: 3,
-                //   gridDelegate:
-                //       const SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 3,
-                //   ),
-                //   itemBuilder: (context, index) {
-                //     // Define different content for each card based on the index
-                //     IconData iconData;
-                //     String text;
-                //     switch (index) {
-                //       case 0:
-                //         iconData = Icons.alarm;
-                //         text = 'Time Management';
-                //         break;
-                //       case 1:
-                //         iconData = CupertinoIcons.briefcase_fill;
-                //         text = 'Career Guidance';
-                //         break;
-                //       case 2:
-                //         iconData = CupertinoIcons.heart_fill;
-                //         text = 'Relationship ';
-                //         break;
-                //       default:
-                //         iconData = Icons.error;
-                //         text = 'Unknown';
-                //     }
-
-                //     return Card(
-                //       elevation: 3,
-                //       color: kBackgroundColor,
-                //       child: Column(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         children: [
-                //           Icon(
-                //             iconData,
-                //             size: 40,
-                //             color: Colors.white,
-                //           ),
-                //           const SizedBox(height: 10),
-                //           Text(
-                //             text,
-                //             style: const TextStyle(
-                //                 fontSize: 16, color: Colors.white),
-                //           ),
-                //         ],
-                //       ),
-                //     );
-                //   },
-                // ),
-
-                // kHeight10,
-                // Text(
-                //   'About',
-                //   style: headingTextStyle,
-                // ),
-                // kHeight10,
-                // Text(
-                //   "Hey, I am ${expert.name}, a passionate Mental Health Professional specializing in Counseling Psychology. Being an adolescent can be tough and it comes with its own unique changes and obstacles. I think they deserve a helping hand which is why I love walking through the life journey with them and helping them maximize their potential. ",
-                //   style: const TextStyle(color: Colors.white, fontSize: 17),
-                // ),
-                // kHeight20,
-                // Text(
-                //   'What can you ask me:',
-                //   style: headingTextStyle,
-                // ),
-                // kHeight10,
-                // Text(
-                //   '♦️ ${expert.question1}',
-                //   style: const TextStyle(color: Colors.white, fontSize: 17),
-                // ),
-                // kHeight10,
-                // Text('♦️ ${expert.question2}',
-                //     style:
-                //         const TextStyle(color: Colors.white, fontSize: 17)),
-                // kHeight10,
-                // Text('♦️ ${expert.question3}',
-                //     style:
-                //         const TextStyle(color: Colors.white, fontSize: 17)),
-                // kHeight10,
+                //
 
                 //user feedback
                 Column(

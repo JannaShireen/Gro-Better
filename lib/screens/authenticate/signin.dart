@@ -38,13 +38,7 @@ class _SignInState extends State<SignIn> {
                     title: Text(
                       'Gro Better',
                       style: appBarTitleText,
-                    )
-                    //   style: Theme.of(context)
-                    //       .textTheme
-                    //       .headlineMedium!
-                    //       .copyWith(color: kTextColor2, fontWeight: FontWeight.bold),
-                    // ),
-                    ),
+                    )),
 
                 body: SafeArea(
                   child: SingleChildScrollView(
@@ -88,18 +82,6 @@ class _SignInState extends State<SignIn> {
                                             });
                                           },
                                         ),
-                                        // TextFormField(
-                                        //   decoration: textInputDecoration.copyWith(
-                                        //       hintText: 'Email or Username'),
-                                        //   validator: (val) => val!.isEmpty
-                                        //       ? 'Enter an email'
-                                        //       : null,
-                                        //   onChanged: (val) {
-                                        //     setState(() {
-                                        //       email = val;
-                                        //     });
-                                        //   },
-                                        // ),
 
                                         kHeight10,
 
@@ -116,20 +98,6 @@ class _SignInState extends State<SignIn> {
                                           },
                                           obscureText: true,
                                         ),
-
-                                        // TextFormField(
-                                        //   decoration: textInputDecoration.copyWith(
-                                        //       hintText: 'Password'),
-                                        //   validator: (value) => value!.length < 6
-                                        //       ? 'Password must be at least 6 characters long'
-                                        //       : null,
-                                        //   obscureText: true,
-                                        //   onChanged: (value) {
-                                        //     setState(() {
-                                        //       password = value;
-                                        //     });
-                                        //   },
-                                        // ),
 
                                         const SizedBox(height: 10),
 
@@ -158,7 +126,6 @@ class _SignInState extends State<SignIn> {
                                           ),
                                         ),
                                         kHeight10,
-                                        //  const SizedBox(height: 20),
 
                                         // sign in button
                                         SizedBox(
